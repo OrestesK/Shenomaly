@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbxi52lv8f5cp"]
+
+[ext_resource type="PackedScene" uid="uid://bmjip7nsmy66e" path="res://scenes/sheep.tscn" id="1_fkc7i"]
+[ext_resource type="PackedScene" uid="uid://1knj7p4t1v2h" path="res://scenes/cowboy.tscn" id="2_71ebn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g0ep8"]
+size = Vector2(1, 200)
+
+[node name="Main" type="Node2D"]
+
+[node name="sheep" parent="." instance=ExtResource("1_fkc7i")]
+
+[node name="cowboy_body" parent="." instance=ExtResource("2_71ebn")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="level_collision1" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(150, 0)
+shape = SubResource("RectangleShape2D_g0ep8")
+
+[node name="level_collision2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 100)
+rotation = 1.5708
+scale = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_g0ep8")
+
+[node name="level_collision3" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -100)
+rotation = 1.5708
+scale = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_g0ep8")
+
+[node name="level_collision4" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-150, 1)
+shape = SubResource("RectangleShape2D_g0ep8")

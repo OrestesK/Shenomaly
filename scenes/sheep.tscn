@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://bmjip7nsmy66e"]
+
+[ext_resource type="Script" path="res://scripts/sheep_body.gd" id="1_cirx8"]
+[ext_resource type="Texture2D" uid="uid://ctk35217esrk2" path="res://assets/sprites/sheep.png" id="2_ikmjs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cmmma"]
+size = Vector2(30, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5qik"]
+atlas = ExtResource("2_ikmjs")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdh6w"]
+atlas = ExtResource("2_ikmjs")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8d542"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5qik")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdh6w")
+}],
+"loop": true,
+"name": &"bop",
+"speed": 5.0
+}]
+
+[node name="sheep" type="CharacterBody2D"]
+position = Vector2(26, -57)
+script = ExtResource("1_cirx8")
+
+[node name="sheep_collision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_cmmma")
+
+[node name="sheep_sprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_8d542")
+animation = &"bop"

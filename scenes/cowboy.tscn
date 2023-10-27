@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://1knj7p4t1v2h"]
+
+[ext_resource type="Script" path="res://scripts/cowboy_body.gd" id="1_oiwi3"]
+[ext_resource type="Texture2D" uid="uid://qxrtfldkbd0g" path="res://assets/sprites/shepherd.png" id="2_gox7x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mrgvs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8nija"]
+atlas = ExtResource("2_gox7x")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vsh25"]
+atlas = ExtResource("2_gox7x")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtjww"]
+atlas = ExtResource("2_gox7x")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6j5ni"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8nija")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vsh25")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rtjww")
+}],
+"loop": true,
+"name": &"bop",
+"speed": 5.0
+}]
+
+[node name="cowboy" type="CharacterBody2D"]
+script = ExtResource("1_oiwi3")
+
+[node name="cowboy_collision" type="CollisionShape2D" parent="."]
+visible = false
+scale = Vector2(1.56, 2)
+shape = SubResource("CircleShape2D_mrgvs")
+
+[node name="cowboy_sprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+sprite_frames = SubResource("SpriteFrames_6j5ni")
+animation = &"bop"
