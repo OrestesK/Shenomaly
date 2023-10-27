@@ -3,4 +3,5 @@ extends CharacterBody2D
 @onready var _sprite = $cowboy_sprite
 
 func _process(_delta):
-		_sprite.play("bop")
+	#plays the bop (idle) animation
+	_sprite.play("bop")
