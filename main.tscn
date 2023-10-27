@@ -8,7 +8,7 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_j4vdu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g0ep8"]
-size = Vector2(100, 100)
+size = Vector2(1, 200)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mrgvs"]
 
@@ -69,13 +69,29 @@ animations = [{
 [node name="Main" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(5, 5)
+zoom = Vector2(3, 3)
 
 [node name="level" type="RigidBody2D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_j4vdu")
 
-[node name="level_collision" type="CollisionShape2D" parent="level"]
-scale = Vector2(2, 2)
+[node name="level_collision1" type="CollisionShape2D" parent="level"]
+position = Vector2(150, 0)
+shape = SubResource("RectangleShape2D_g0ep8")
+
+[node name="level_collision2" type="CollisionShape2D" parent="level"]
+position = Vector2(0, 100)
+rotation = 1.5708
+scale = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_g0ep8")
+
+[node name="level_collision3" type="CollisionShape2D" parent="level"]
+position = Vector2(0, -100)
+rotation = 1.5708
+scale = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_g0ep8")
+
+[node name="level_collision4" type="CollisionShape2D" parent="level"]
+position = Vector2(-150, 1)
 shape = SubResource("RectangleShape2D_g0ep8")
 
 [node name="cowboy_body" type="CharacterBody2D" parent="."]
@@ -93,7 +109,7 @@ sprite_frames = SubResource("SpriteFrames_6j5ni")
 animation = &"bop"
 
 [node name="sheep_body" type="CharacterBody2D" parent="."]
-position = Vector2(40, 0)
+position = Vector2(26, -57)
 script = ExtResource("3_fthfh")
 
 [node name="sheep_collision" type="CollisionShape2D" parent="sheep_body"]
