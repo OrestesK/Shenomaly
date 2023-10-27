@@ -1,14 +1,43 @@
-[gd_scene load_steps=5 format=3 uid="uid://bbxi52lv8f5cp"]
+[gd_scene load_steps=10 format=3 uid="uid://bbxi52lv8f5cp"]
+
+[ext_resource type="Script" path="res://cowboy_body.gd" id="1_3mbii"]
+[ext_resource type="Texture2D" uid="uid://qxrtfldkbd0g" path="res://assets/sprites/shepherd.png" id="1_pro80"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_j4vdu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g0ep8"]
-size = Vector2(400, 300)
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_g13tr"]
-bounce = 0.5
+size = Vector2(100, 100)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mrgvs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8nija"]
+atlas = ExtResource("1_pro80")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vsh25"]
+atlas = ExtResource("1_pro80")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtjww"]
+atlas = ExtResource("1_pro80")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6j5ni"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8nija")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vsh25")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rtjww")
+}],
+"loop": true,
+"name": &"bop",
+"speed": 5.0
+}]
 
 [node name="Main" type="Node2D"]
 
@@ -16,18 +45,20 @@ bounce = 0.5
 physics_material_override = SubResource("PhysicsMaterial_j4vdu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_g0ep8")
 
-[node name="RigidBody2D2" type="RigidBody2D" parent="."]
-physics_material_override = SubResource("PhysicsMaterial_g13tr")
+[node name="cowboy_body" type="CharacterBody2D" parent="."]
+script = ExtResource("1_3mbii")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D2"]
+[node name="cowboy_collision" type="CollisionShape2D" parent="cowboy_body"]
 scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_mrgvs")
 
-[node name="Polygon2D" type="Polygon2D" parent="RigidBody2D2"]
-position = Vector2(6, -4)
-color = Color(0.129412, 0.160784, 1, 1)
-polygon = PackedVector2Array(-30, -15, 12, -15, 10, 14, -32, 10)
+[node name="cowboy_sprite" type="AnimatedSprite2D" parent="cowboy_body"]
+texture_filter = 1
+texture_repeat = 2
+sprite_frames = SubResource("SpriteFrames_6j5ni")
+animation = &"bop"
 
 [node name="Camera2D" type="Camera2D" parent="."]
