@@ -17,8 +17,9 @@ theme = ExtResource("1_6katx")
 
 [node name="TopLeft" type="VBoxContainer" parent="Info"]
 layout_mode = 1
+offset_top = 82.0
 offset_right = 150.0
-offset_bottom = 78.0
+offset_bottom = 160.0
 
 [node name="Strikes" type="Label" parent="Info/TopLeft"]
 layout_mode = 2
@@ -53,7 +54,7 @@ grow_vertical = 0
 
 [node name="GunCooldown" type="Label" parent="Info/BottomLeft"]
 layout_mode = 2
-text = "GUN ready"
+text = "  GUN ready"
 
 [node name="KnockbackCooldown" type="Label" parent="Info/BottomLeft"]
 layout_mode = 2
