@@ -155,7 +155,8 @@ height = 36.0
 [node name="Cowboy" type="CharacterBody2D" groups=["FearSource", "Player"]]
 collision_layer = 4
 script = ExtResource("1_cf3rq")
-speed = 200
+walk_speed = 200
+sprint_speed = 350
 
 [node name="CowboySprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -165,3 +166,7 @@ animation = &"bop_back"
 
 [node name="CowboyCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_il1rs")
+
+[node name="SprintTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
