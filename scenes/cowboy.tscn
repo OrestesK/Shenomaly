@@ -161,7 +161,7 @@ speed = 200
 texture_filter = 1
 texture_repeat = 2
 sprite_frames = SubResource("SpriteFrames_6j5ni")
-animation = &"bop_front"
+animation = &"bop_back"
 
 [node name="CowboyCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_il1rs")
