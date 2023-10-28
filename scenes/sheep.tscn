@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bmjip7nsmy66e"]
+[gd_scene load_steps=9 format=3 uid="uid://bmjip7nsmy66e"]
 
 [ext_resource type="Script" path="res://scripts/sheep.gd" id="1_nwcdf"]
 [ext_resource type="Texture2D" uid="uid://ctk35217esrk2" path="res://assets/sprites/sheep.png" id="2_ikmjs"]
+[ext_resource type="AudioStream" uid="uid://bjdggek1pm3kv" path="res://assets/SoundAffects/sheepbaaah.mp3" id="3_js2bv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cmmma"]
 size = Vector2(30, 19)
@@ -61,6 +62,9 @@ collision_mask = 12
 shape = SubResource("CircleShape2D_nrjeg")
 
 [node name="AvoidanceCaster" type="RayCast2D" parent="."]
+
+[node name="SheepBaaah" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_js2bv")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_detection_area_body_exited"]
