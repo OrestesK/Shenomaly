@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dndpvioyudhhl"]
+[gd_scene load_steps=8 format=3 uid="uid://dndpvioyudhhl"]
 
 [ext_resource type="Texture2D" uid="uid://ddwm6d07qwxi" path="res://assets/sprites/Monster.png" id="1_im8ri"]
 [ext_resource type="Script" path="res://scripts/monster.gd" id="1_q7soi"]
+[ext_resource type="AudioStream" uid="uid://bc8rfdmd34pe0" path="res://assets/SoundAffects/MonsterGrowl.mp3" id="2_jo15d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nm1ux"]
 size = Vector2(48, 73)
@@ -39,6 +40,10 @@ metadata/_edit_group_ = true
 
 [node name="MonsterCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_nm1ux")
+
+[node name="MonsterMoan" type="AudioStreamPlayer2D" parent="MonsterCollision"]
+stream = ExtResource("2_jo15d")
+pitch_scale = 1.15
 
 [node name="MonsterSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p5m2m")

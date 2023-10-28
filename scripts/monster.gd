@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var speed: float
+@onready var monsterMoan =  $MonsterCollision/MonsterMoan
 
 var _sprite: AnimatedSprite2D
 var _detected: Array[CharacterBody2D] # array holding bodies in detection area
@@ -33,5 +34,6 @@ func _physics_process(delta):
 	if collision:
 		if collision.get_collider().has_method("get_captured"):
 			collision.get_collider().get_captured()
+			monsterMoan.play()
 	
 

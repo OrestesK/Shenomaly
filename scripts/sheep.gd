@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var speed: float
 @export var max_rotation: float
 @export var max_turn_accel: float
+@onready var sheepbaah = $Area2D/SheepBaaah
 
 var _sprite: AnimatedSprite2D
 var _detected: Array[CharacterBody2D] # array holding bodies in detection area
@@ -58,6 +59,7 @@ func _physics_process(delta):
 func _on_detection_area_body_entered(body):
 	_current_state = STATE.FLEEING
 	_detected.append(body)
+	sheepbaah.play()
 
 # detect when object exits detection area
 func _on_detection_area_body_exited(body):

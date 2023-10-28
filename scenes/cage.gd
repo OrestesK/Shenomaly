@@ -1,6 +1,7 @@
 extends Area2D
 
 @export var max_sheep = 10
+@onready var cageThump = $CageThump
 
 var _current_sheep = 0
 var _filled_callable: Callable
@@ -9,6 +10,7 @@ var _time_text: Label
 
 const COUNT_FORMAT = "%d/%d"
 const TIME_FORMAT = "%ds"
+
 
 func _ready():
 	_count_text = get_node("Canvas/Sheep")
@@ -23,6 +25,7 @@ func _on_body_entered(body):
 	# assume the only objects that can collide are sheeps
 	if body.has_method("get_captured"):
 		body.get_captured()
+		cageThump.play()
 	_current_sheep += 1
 	
 	_count_text.text = COUNT_FORMAT % [_current_sheep, max_sheep]
