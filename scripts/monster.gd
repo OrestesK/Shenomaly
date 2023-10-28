@@ -9,6 +9,8 @@ var _detected: Array[CharacterBody2D] # array holding bodies in detection area
 var sheep: Array[CharacterBody2D]
 var current_dir = 0;
 
+var stuck_time = 0.5
+
 
 var error = PI/10
 const EAST = 0
@@ -66,6 +68,9 @@ func set_sprite():
 
 # every frame
 func _process(delta):
+	if stuck_time > 0:
+		stuck_time -= delta
+		return
 	#plays the bop (idle) animation
 	set_sprite()
 	

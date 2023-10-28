@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cwj00u1myusug"]
+[gd_scene load_steps=24 format=3 uid="uid://cwj00u1myusug"]
 
 [ext_resource type="Script" path="res://scripts/corral.gd" id="1_aws85"]
 [ext_resource type="PackedScene" uid="uid://c1np7vko01cmp" path="res://scenes/cage.tscn" id="2_6mnav"]
@@ -7,12 +7,105 @@
 [ext_resource type="PackedScene" uid="uid://1knj7p4t1v2h" path="res://scenes/cowboy.tscn" id="4_jb8n6"]
 [ext_resource type="Texture2D" uid="uid://csoxul62clj8f" path="res://assets/sprites/Background_Main.png" id="5_1gstk"]
 [ext_resource type="Texture2D" uid="uid://vi4s246u6qi" path="res://assets/sprites/Background_Fence.png" id="7_o1xjs"]
+[ext_resource type="Texture2D" uid="uid://c32qnbsd5wqjc" path="res://assets/sprites/Lightning.png" id="8_muqj2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5pe34"]
 size = Vector2(15, 715)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xatra"]
 size = Vector2(1270, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wblyh"]
+atlas = ExtResource("8_muqj2")
+region = Rect2(0, 0, 64, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwf61"]
+atlas = ExtResource("8_muqj2")
+region = Rect2(64, 0, 64, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qw6ve"]
+atlas = ExtResource("8_muqj2")
+region = Rect2(128, 0, 64, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axiuj"]
+atlas = ExtResource("8_muqj2")
+region = Rect2(192, 0, 64, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7nxd0"]
+atlas = ExtResource("8_muqj2")
+region = Rect2(256, 0, 64, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bt30f"]
+atlas = ExtResource("8_muqj2")
+region = Rect2(320, 0, 64, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pxecq"]
+atlas = ExtResource("8_muqj2")
+region = Rect2(384, 0, 64, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4r37"]
+atlas = ExtResource("8_muqj2")
+region = Rect2(448, 0, 64, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xsktq"]
+atlas = ExtResource("8_muqj2")
+region = Rect2(512, 0, 64, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4sfgq"]
+atlas = ExtResource("8_muqj2")
+region = Rect2(576, 0, 64, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gti4d"]
+atlas = ExtResource("8_muqj2")
+region = Rect2(640, 0, 64, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8d2q"]
+atlas = ExtResource("8_muqj2")
+region = Rect2(704, 0, 64, 800)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cgkgf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wblyh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pwf61")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qw6ve")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axiuj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7nxd0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bt30f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pxecq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4r37")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xsktq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4sfgq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gti4d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8d2q")
+}],
+"loop": false,
+"name": &"Strike",
+"speed": 25.0
+}]
 
 [node name="Corral" type="Node2D"]
 script = ExtResource("1_aws85")
@@ -62,6 +155,10 @@ autostart = true
 
 [node name="LightningTimer" type="Timer" parent="."]
 
+[node name="LightningEndTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
 [node name="Cowboy" parent="." instance=ExtResource("4_jb8n6")]
 
 [node name="FenceContainer" type="MarginContainer" parent="."]
@@ -76,6 +173,12 @@ offset_bottom = 360.0
 layout_mode = 2
 texture = ExtResource("7_o1xjs")
 
+[node name="LightningStrike" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_cgkgf")
+animation = &"Strike"
+
 [connection signal="timeout" from="CageTimer" to="." method="spawn_new_cage"]
 [connection signal="timeout" from="SheepTimer" to="." method="spawn_random_sheep"]
 [connection signal="timeout" from="LightningTimer" to="." method="on_lightning_strike"]
+[connection signal="timeout" from="LightningEndTimer" to="." method="on_lightning_strike_end"]
