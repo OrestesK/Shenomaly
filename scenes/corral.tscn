@@ -1,17 +1,19 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwj00u1myusug"]
+[gd_scene load_steps=11 format=3 uid="uid://cwj00u1myusug"]
 
 [ext_resource type="Script" path="res://scripts/corral.gd" id="1_aws85"]
 [ext_resource type="PackedScene" uid="uid://c1np7vko01cmp" path="res://scenes/cage.tscn" id="2_6mnav"]
 [ext_resource type="PackedScene" uid="uid://bmjip7nsmy66e" path="res://scenes/sheep.tscn" id="3_a76w7"]
 [ext_resource type="PackedScene" uid="uid://dndpvioyudhhl" path="res://scenes/monster.tscn" id="4_fnipf"]
 [ext_resource type="PackedScene" uid="uid://1knj7p4t1v2h" path="res://scenes/cowboy.tscn" id="4_jb8n6"]
+[ext_resource type="Texture2D" uid="uid://csoxul62clj8f" path="res://assets/sprites/Background_Main.png" id="5_1gstk"]
 [ext_resource type="PackedScene" uid="uid://yr65f5hdo3a4" path="res://scenes/hud.tscn" id="6_23cdu"]
+[ext_resource type="Texture2D" uid="uid://vi4s246u6qi" path="res://assets/sprites/Background_Fence.png" id="7_o1xjs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5pe34"]
-size = Vector2(15, 682)
+size = Vector2(15, 715)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xatra"]
-size = Vector2(1189, 20)
+size = Vector2(1270, 20)
 
 [node name="Corral" type="Node2D"]
 script = ExtResource("1_aws85")
@@ -21,23 +23,35 @@ cage_scene = ExtResource("2_6mnav")
 sheep_scene = ExtResource("3_a76w7")
 monster_scene = ExtResource("4_fnipf")
 
+[node name="BackgroundContainer" type="MarginContainer" parent="."]
+z_index = -2
+texture_filter = 1
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="Background" type="TextureRect" parent="BackgroundContainer"]
+layout_mode = 2
+texture = ExtResource("5_1gstk")
+
 [node name="Walls" type="StaticBody2D" parent="."]
 collision_mask = 15
 
 [node name="Wall1" type="CollisionShape2D" parent="Walls"]
-position = Vector2(-589, 6)
+position = Vector2(-641, 1)
 shape = SubResource("RectangleShape2D_5pe34")
 
 [node name="Wall2" type="CollisionShape2D" parent="Walls"]
-position = Vector2(580, 1)
+position = Vector2(641, 10)
 shape = SubResource("RectangleShape2D_5pe34")
 
 [node name="Wall3" type="CollisionShape2D" parent="Walls"]
-position = Vector2(-4.5, 326)
+position = Vector2(0, 370)
 shape = SubResource("RectangleShape2D_xatra")
 
 [node name="Wall4" type="CollisionShape2D" parent="Walls"]
-position = Vector2(-4.5, -332)
+position = Vector2(0, -264)
 shape = SubResource("RectangleShape2D_xatra")
 
 [node name="CageTimer" type="Timer" parent="."]
@@ -63,6 +77,18 @@ one_shot = true
 [node name="Cowboy" parent="." instance=ExtResource("4_jb8n6")]
 
 [node name="HUD" parent="." instance=ExtResource("6_23cdu")]
+
+[node name="FenceContainer" type="MarginContainer" parent="."]
+z_index = 10
+texture_filter = 1
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="TextureRect" type="TextureRect" parent="FenceContainer"]
+layout_mode = 2
+texture = ExtResource("7_o1xjs")
 
 [connection signal="timeout" from="CageTimer" to="." method="spawn_new_cage"]
 [connection signal="timeout" from="SheepTimer" to="." method="spawn_random_sheep"]
