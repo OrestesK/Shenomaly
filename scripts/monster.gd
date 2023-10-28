@@ -1,20 +1,73 @@
 extends CharacterBody2D
 
 @export var speed: float
+@onready var monsterMoan =  $MonsterCollision/MonsterMoan
 
 var _sprite: AnimatedSprite2D
 var _detected: Array[CharacterBody2D] # array holding bodies in detection area
 
 var sheep: Array[CharacterBody2D]
+var current_dir = 0;
+
+
+var error = PI/10
+const EAST = 0
+const SOUTH_EAST = PI / 4
+const SOUTH = PI / 2
+const SOUTH_WEST = 3 * PI / 4
+const WEST = PI
+const NORTH_WEST = -3 * PI / 4
+const NORTH = -PI / 2
+const NORTH_EAST = -PI / 4
 
 # on creation
 func _ready():
 	_sprite = $MonsterSprite
 
+# Check if a is within error of b
+func within(a, b, error):
+	return (b - error < a && a < b + error)
+	
+func set_sprite():
+	if velocity == Vector2(0, 0) : 
+		if within(current_dir, NORTH_WEST, error) || within(current_dir, NORTH, error) || within(current_dir, NORTH_EAST, error):
+			_sprite.play("bopBack")
+		else:
+			_sprite.play("bopFront")
+		return
+		
+	current_dir = velocity.angle()
+	
+	if within(current_dir, EAST, error):
+		_sprite.set_flip_h( false )
+		_sprite.play("walkFront")
+	elif within(current_dir, SOUTH_EAST, error):
+		_sprite.set_flip_h( false )
+		_sprite.play("walkFront")
+	elif within(current_dir, SOUTH, error):
+		_sprite.play("walkFront")
+	elif within(current_dir, SOUTH_WEST, error):
+		_sprite.set_flip_h( true )
+		_sprite.play("walkFront")
+	elif within(current_dir, WEST, error):
+		_sprite.set_flip_h( true )
+		_sprite.play("walkFront")
+	elif within(current_dir, NORTH_WEST, error):
+		_sprite.set_flip_h( true )
+		_sprite.play("walkBack")
+	elif within(current_dir, NORTH, error):
+		_sprite.play("walkBack")
+	elif within(current_dir, NORTH_EAST, error):
+		_sprite.set_flip_h( false )
+		_sprite.play("walkBack")
+	else:
+		pass
+		
+
 # every frame
 func _process(delta):
 	#plays the bop (idle) animation
-	_sprite.play("bop")
+	set_sprite()
 	
 	if len(sheep) > 0:
 		var closest := sheep[0]
@@ -31,7 +84,8 @@ func _physics_process(delta):
 	var collision = move_and_collide(velocity * delta)
 	
 	if collision:
-		if collision.get_collider().has_method("get_captured"):
+		if collision.get_collider().is_in_group("Sheep"):
 			collision.get_collider().get_captured()
+			monsterMoan.play()
 	
 

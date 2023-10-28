@@ -1,0 +1,81 @@
+[gd_scene load_steps=4 format=3 uid="uid://dp5wtv6i2bne8"]
+
+[ext_resource type="Theme" uid="uid://bvode3hd2efqi" path="res://themes/shenomaly_theme.tres" id="1_4tlxx"]
+[ext_resource type="Texture2D" uid="uid://do6urumcby2wl" path="res://assets/banana.jpg" id="1_mtt1j"]
+[ext_resource type="PackedScene" uid="uid://1knj7p4t1v2h" path="res://scenes/cowboy.tscn" id="2_lhl7b"]
+
+[node name="menu" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_4tlxx")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_mtt1j")
+expand_mode = 1
+
+[node name="Cowboy" parent="." instance=ExtResource("2_lhl7b")]
+position = Vector2(376, 364)
+scale = Vector2(8, 8)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Title" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/Title"]
+layout_mode = 2
+text = "THIS TILE IS SO COOL"
+
+[node name="Container1" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/Container1"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/Container1/HBoxContainer"]
+layout_mode = 2
+text = ">"
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer/Container1/HBoxContainer"]
+layout_mode = 2
+text = "OPTION 1"
+
+[node name="Container2" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/Container2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/Container2/HBoxContainer"]
+layout_mode = 2
+text = ">"
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer/Container2/HBoxContainer"]
+layout_mode = 2
+text = "OPTION 2"
+
+[node name="Container3" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/Container3"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/Container3/HBoxContainer"]
+layout_mode = 2
+text = ">"
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer/Container3/HBoxContainer"]
+layout_mode = 2
+text = "OPTION 3"
+
+[node name="Cowboy2" parent="." instance=ExtResource("2_lhl7b")]
+position = Vector2(915, 373)
+scale = Vector2(8, 8)
