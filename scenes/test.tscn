@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://chjvykul2jpbb"]
+
+[ext_resource type="PackedScene" uid="uid://dndpvioyudhhl" path="res://scenes/monster.tscn" id="1_k8drr"]
+[ext_resource type="PackedScene" uid="uid://1knj7p4t1v2h" path="res://scenes/cowboy.tscn" id="2_y5wcg"]
+
+[node name="test" type="Node2D"]
+
+[node name="Monster" parent="." instance=ExtResource("1_k8drr")]
+
+[node name="Cowboy" parent="." instance=ExtResource("2_y5wcg")]
+position = Vector2(725, 436)

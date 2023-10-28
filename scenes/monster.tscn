@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://dndpvioyudhhl"]
+
+[ext_resource type="Texture2D" uid="uid://cy5ibnrjpg8i" path="res://assets/sprites/Monster.png" id="1_im8ri"]
+[ext_resource type="Script" path="res://scripts/monster.gd" id="1_q7soi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nm1ux"]
+size = Vector2(48, 73)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0wtt"]
+atlas = ExtResource("1_im8ri")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d02vi"]
+atlas = ExtResource("1_im8ri")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p5m2m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0wtt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d02vi")
+}],
+"loop": true,
+"name": &"bop",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_un0ke"]
+radius = 300.0
+
+[node name="Monster" type="CharacterBody2D"]
+texture_filter = 1
+collision_layer = 2
+up_direction = Vector2(0, 1)
+script = ExtResource("1_q7soi")
+speed = 30.0
+
+[node name="MonsterCollision" type="CollisionShape2D" parent="."]
+position = Vector2(357, 247)
+shape = SubResource("RectangleShape2D_nm1ux")
+
+[node name="MonsterSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(357, 242)
+sprite_frames = SubResource("SpriteFrames_p5m2m")
+animation = &"bop"
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-13, 30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(368, 222)
+shape = SubResource("CircleShape2D_un0ke")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_body_exited"]
