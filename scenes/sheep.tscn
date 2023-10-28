@@ -35,6 +35,7 @@ radius = 100.0
 position = Vector2(26, -57)
 collision_layer = 2
 script = ExtResource("1_nwcdf")
+speed = 30.0
 max_rotation = 0.8
 max_turn_accel = 2.0
 
