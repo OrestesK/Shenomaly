@@ -1,14 +1,15 @@
 [gd_scene load_steps=6 format=3 uid="uid://c1np7vko01cmp"]
 
-[ext_resource type="Texture2D" uid="uid://x4tsxk4fhv62" path="res://assets/sprites/cage.jpg" id="1_g6sap"]
 [ext_resource type="Script" path="res://scripts/cage.gd" id="1_l7320"]
+[ext_resource type="Texture2D" uid="uid://bkfabtfchxlu" path="res://assets/sprites/Cage_Bottom.png" id="2_q080q"]
 [ext_resource type="Theme" uid="uid://bvode3hd2efqi" path="res://themes/shenomaly_theme.tres" id="3_7p0tl"]
 [ext_resource type="AudioStream" uid="uid://ixhxn7qlun2x" path="res://assets/SoundAffects/CageThump.mp3" id="3_l54l0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jmjxm"]
-size = Vector2(144, 110)
+size = Vector2(128, 128)
 
 [node name="Cage" type="Area2D"]
+texture_filter = 1
 position = Vector2(-266, 0)
 collision_mask = 2
 script = ExtResource("1_l7320")
@@ -16,8 +17,8 @@ max_sheep = 5
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("1_g6sap")
+scale = Vector2(2, 2)
+texture = ExtResource("2_q080q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_jmjxm")

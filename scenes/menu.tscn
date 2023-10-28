@@ -51,7 +51,7 @@ layout_mode = 2
 
 [node name="Title" type="Label" parent="CenterContainer/VBoxContainer/Title"]
 layout_mode = 2
-text = "THIS TILE IS SO COOL"
+text = "SHENOMALY"
 label_settings = SubResource("LabelSettings_vlk2h")
 
 [node name="CenterContainer" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
