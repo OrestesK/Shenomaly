@@ -15,7 +15,7 @@ size = Vector2(1189, 20)
 [node name="Corral" type="Node2D"]
 script = ExtResource("1_aws85")
 spawn_bounds = Vector4(-500, -250, 500, 250)
-lightning_range = Vector2(3, 10)
+lightning_range = Vector2(12, 16)
 cage_scene = ExtResource("2_6mnav")
 sheep_scene = ExtResource("3_a76w7")
 monster_scene = ExtResource("4_fnipf")
