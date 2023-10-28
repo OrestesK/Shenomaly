@@ -22,6 +22,11 @@ var _sheep: Array[CharacterBody2D]
 func _ready():
 	start_game()
 
+func _process(delta):
+	$HUD.set_gun_cooldown($GunCd.time_left)
+	$HUD.set_knockback_cooldown($KnockbackCd.time_left)
+	$HUD.set_sprint_cooldown($SprintCd.time_left)
+
 func start_game():
 	$SheepTimer.start()
 	$CageTimer.start()
@@ -100,3 +105,21 @@ func on_lightning_strike():
 	add_child(monster)
 	
 	$LightningTimer.start(randf_range(lightning_range.x, lightning_range.y))
+
+func _on_cowboy_gun_used():
+	$GunCd.start()
+
+func _on_cowboy_knockback_used():
+	$KnockbackCd.start()
+
+func _on_cowboy_sprint_used():
+	$SprintCd.start()
+
+func _on_knockback_cd_timeout():
+	$Cowboy.ready_knockback()
+
+func _on_gun_cd_timeout():
+	$Cowboy.ready_gun()
+
+func _on_sprint_cd_timeout():
+	$Cowboy.ready_sprint()

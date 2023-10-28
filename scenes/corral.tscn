@@ -48,6 +48,18 @@ one_shot = true
 
 [node name="LightningTimer" type="Timer" parent="."]
 
+[node name="KnockbackCd" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="GunCd" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+
+[node name="SprintCd" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
 [node name="Cowboy" parent="." instance=ExtResource("4_jb8n6")]
 
 [node name="HUD" parent="." instance=ExtResource("6_23cdu")]
@@ -55,3 +67,9 @@ one_shot = true
 [connection signal="timeout" from="CageTimer" to="." method="spawn_new_cage"]
 [connection signal="timeout" from="SheepTimer" to="." method="spawn_random_sheep"]
 [connection signal="timeout" from="LightningTimer" to="." method="on_lightning_strike"]
+[connection signal="timeout" from="KnockbackCd" to="." method="_on_knockback_cd_timeout"]
+[connection signal="timeout" from="GunCd" to="." method="_on_gun_cd_timeout"]
+[connection signal="timeout" from="SprintCd" to="." method="_on_sprint_cd_timeout"]
+[connection signal="gun_used" from="Cowboy" to="." method="_on_cowboy_gun_used"]
+[connection signal="knockback_used" from="Cowboy" to="." method="_on_cowboy_knockback_used"]
+[connection signal="sprint_used" from="Cowboy" to="." method="_on_cowboy_sprint_used"]

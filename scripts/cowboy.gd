@@ -3,9 +3,11 @@ extends CharacterBody2D
 @export var speed = 100
 var sprite: AnimatedSprite2D
 
+signal sprint_used
+signal gun_used
+signal knockback_used
 
 var current_dir = 0;
-
 
 var error = PI/10
 const EAST = 0
@@ -16,6 +18,12 @@ const WEST = PI
 const NORTH_WEST = -3 * PI / 4
 const NORTH = -PI / 2
 const NORTH_EAST = -PI / 4
+
+var _gun_ready = true
+var _sprint_ready = true
+var _knockback_ready = true
+
+var _sprint = false
 
 func _ready():
 	sprite = $CowboySprite
@@ -59,14 +67,42 @@ func set_sprite():
 	else:
 		pass
 		
-func _process(_delta):
-	set_sprite()
-
+func _start_sprint():
+	sprint_used.emit()
+	_sprint_ready = false
 	
+func _fire_gun():
+	gun_used.emit()
+	_gun_ready = false
+	
+func _use_zap():
+	knockback_used.emit()
+	_knockback_ready = false
+	
+func _process(_delta):
+	if Input.is_action_pressed("sprint") && _sprint_ready:
+		_start_sprint()
+		
+	if Input.is_action_pressed("shoot") && _gun_ready:
+		_fire_gun()
+		
+	if Input.is_action_pressed("zap") && _knockback_ready:
+		_use_zap()
+		
+	set_sprite()
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * speed
+
+func ready_sprint():
+	_sprint_ready = true
+
+func ready_gun():
+	_gun_ready = true;
+
+func ready_knockback():
+	_knockback_ready = true
 
 func _physics_process(delta):
 	get_input()
