@@ -117,7 +117,7 @@ func on_lightning_strike():
 func on_lightning_strike_end():
 	var monster = monster_scene.instantiate()
 	monster.sheep = _sheep
-	monster.position = $LightningStrike.position + Vector2(0, lightning_height / 2)
+	monster.position = $LightningStrike.position + Vector2(0, lightning_height / 2 - 64/2)
 	add_child(monster)
 
 func _on_cowboy_gun_used():

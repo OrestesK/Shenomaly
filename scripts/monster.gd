@@ -9,8 +9,6 @@ var _detected: Array[CharacterBody2D] # array holding bodies in detection area
 var sheep: Array[CharacterBody2D]
 var current_dir = 0;
 
-var stuck_time = 0.5
-
 
 var error = PI/10
 const EAST = 0
@@ -22,9 +20,12 @@ const NORTH_WEST = -3 * PI / 4
 const NORTH = -PI / 2
 const NORTH_EAST = -PI / 4
 
+var stuck_time = 0.3
+
 # on creation
 func _ready():
 	_sprite = $MonsterSprite
+	_sprite.play("bopFront")
 
 # Check if a is within error of b
 func within(a, b, error):
