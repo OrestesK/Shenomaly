@@ -21,10 +21,12 @@ func _process(delta):
 
 func _on_body_entered(body):
 	# assume the only objects that can collide are sheeps
-	body.queue_free()
+	if body.has_method("get_captured"):
+		body.get_captured()
 	_current_sheep += 1
 	
 	_count_text.text = COUNT_FORMAT % [_current_sheep, max_sheep]
+	
 	
 	if _current_sheep == max_sheep:
 		_end_cage()
