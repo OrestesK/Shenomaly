@@ -11,36 +11,38 @@ size = Vector2(15, 682)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xatra"]
 size = Vector2(1189, 20)
 
-[node name="main" type="Node2D"]
+[node name="Main" type="Node2D"]
 script = ExtResource("1_7pqu0")
 sheep_scene = ExtResource("2_71ebn")
+metadata/_edit_horizontal_guides_ = []
 
-[node name="camera" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-4, -2)
 
-[node name="cowboy" parent="." instance=ExtResource("2_71ebn")]
-
-[node name="corral" type="Area2D" parent="."]
+[node name="Corral" type="StaticBody2D" parent="."]
 script = ExtResource("3_htb7v")
 sheep_scene = ExtResource("1_fkc7i")
 spawn_bounds = Vector4(-570, -300, 570, 300)
 
-[node name="wall_1" type="CollisionShape2D" parent="corral"]
-position = Vector2(-575.5, 1)
+[node name="Wall1" type="CollisionShape2D" parent="Corral"]
+position = Vector2(-589, 6)
 shape = SubResource("RectangleShape2D_5pe34")
 
-[node name="wall_2" type="CollisionShape2D" parent="corral"]
+[node name="Wall2" type="CollisionShape2D" parent="Corral"]
 position = Vector2(580, 1)
 shape = SubResource("RectangleShape2D_5pe34")
 
-[node name="wall_3" type="CollisionShape2D" parent="corral"]
-position = Vector2(-4.5, 331)
+[node name="Wall3" type="CollisionShape2D" parent="Corral"]
+position = Vector2(-4.5, 326)
 shape = SubResource("RectangleShape2D_xatra")
 
-[node name="wall_4" type="CollisionShape2D" parent="corral"]
+[node name="Wall4" type="CollisionShape2D" parent="Corral"]
 position = Vector2(-4.5, -332)
 shape = SubResource("RectangleShape2D_xatra")
 
-[node name="sheep_timer" type="Timer" parent="."]
+[node name="Cowboy" parent="." instance=ExtResource("2_71ebn")]
+
+[node name="SheepTimer" type="Timer" parent="."]
 autostart = true
 
-[connection signal="timeout" from="sheep_timer" to="corral" method="spawn_random_sheep"]
+[connection signal="timeout" from="SheepTimer" to="Corral" method="spawn_random_sheep"]

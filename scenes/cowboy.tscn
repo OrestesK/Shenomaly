@@ -1,9 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://1knj7p4t1v2h"]
 
-[ext_resource type="Script" path="res://scripts/cowboy_body.gd" id="1_oiwi3"]
+[ext_resource type="Script" path="res://scripts/cowboy.gd" id="1_cf3rq"]
 [ext_resource type="Texture2D" uid="uid://qxrtfldkbd0g" path="res://assets/sprites/shepherd.png" id="2_gox7x"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_mrgvs"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_il1rs"]
+radius = 12.0
+height = 36.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8nija"]
 atlas = ExtResource("2_gox7x")
@@ -34,15 +36,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="cowboy" type="CharacterBody2D"]
-script = ExtResource("1_oiwi3")
+[node name="Cowboy" type="CharacterBody2D"]
+script = ExtResource("1_cf3rq")
 
-[node name="cowboy_collision" type="CollisionShape2D" parent="."]
-visible = false
-scale = Vector2(1.56, 2)
-shape = SubResource("CircleShape2D_mrgvs")
+[node name="CowboyCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_il1rs")
 
-[node name="cowboy_sprite" type="AnimatedSprite2D" parent="."]
+[node name="CowboySprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 texture_repeat = 2
 sprite_frames = SubResource("SpriteFrames_6j5ni")
