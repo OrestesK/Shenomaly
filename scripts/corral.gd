@@ -16,16 +16,50 @@ extends Node2D
 
 var _cage: Node
 var _captured_sheep = 0
+var _strikes = 2
 var _sheep: Array[CharacterBody2D]
 
 func _ready():
+	start_game()
+
+func start_game():
+	$SheepTimer.start()
 	$CageTimer.start()
 	$LightningTimer.start(randf_range(lightning_range.x, lightning_range.y))
+	
+	$HUD.set_strikes(_strikes)
+	$HUD.set_quota_remaining(sheep_quota)
+	$HUD.set_gun_cooldown(0.0)
+	$HUD.set_knockback_cooldown(0.0)
+	$HUD.set_sprint_cooldown(0.0)
+	$HUD.set_skillpoint_progress(0, 3)
+	$HUD.hide_end_text()
 
-func on_cage_done(count: int):
+func stop_game(won: bool):
+	get_tree().call_group("Monster", "queue_free")
+	get_tree().call_group("Sheep", "queue_free")
+	
+	$HUD.show_end_text("You win!" if won else "You're fired!")
+	$SheepTimer.stop()
+	$CageTimer.stop()
+	$LightningTimer.stop()
+
+func on_cage_done(count: int, give_strike: bool):
 	#cage should despawn itself, just call the timer to spawn the next one
 	_captured_sheep += count
-	$CageTimer.start()
+	
+	$HUD.set_quota_remaining(clamp(sheep_quota - _captured_sheep, 0, sheep_quota))
+	
+	if give_strike:
+		_strikes -=1
+		$HUD.set_strikes(_strikes)
+	
+	if _strikes == 0:
+		stop_game(false)
+	elif _captured_sheep >= sheep_quota:
+		stop_game(true)
+	else:
+		$CageTimer.start()
 
 func on_sheep_removed(sheep: CharacterBody2D):
 	_sheep.erase(sheep)

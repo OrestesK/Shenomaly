@@ -1,6 +1,7 @@
 extends Area2D
 
 @export var max_sheep = 10
+@export var min_quota = 9
 @onready var cageThump = $CageThump
 
 var _current_sheep = 0
@@ -38,7 +39,7 @@ func register_end_callback(callback: Callable):
 	_filled_callable = callback
 
 func _end_cage():
-	_filled_callable.call(_current_sheep)
+	_filled_callable.call(_current_sheep, _current_sheep < min_quota)
 	queue_free()
 
 func _on_despawn_timer_timeout():

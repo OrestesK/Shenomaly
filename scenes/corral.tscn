@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cwj00u1myusug"]
+[gd_scene load_steps=9 format=3 uid="uid://cwj00u1myusug"]
 
 [ext_resource type="Script" path="res://scripts/corral.gd" id="1_aws85"]
 [ext_resource type="PackedScene" uid="uid://c1np7vko01cmp" path="res://scenes/cage.tscn" id="2_6mnav"]
 [ext_resource type="PackedScene" uid="uid://bmjip7nsmy66e" path="res://scenes/sheep.tscn" id="3_a76w7"]
 [ext_resource type="PackedScene" uid="uid://dndpvioyudhhl" path="res://scenes/monster.tscn" id="4_fnipf"]
 [ext_resource type="PackedScene" uid="uid://1knj7p4t1v2h" path="res://scenes/cowboy.tscn" id="4_jb8n6"]
+[ext_resource type="PackedScene" uid="uid://yr65f5hdo3a4" path="res://scenes/hud.tscn" id="6_23cdu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5pe34"]
 size = Vector2(15, 682)
@@ -44,11 +45,12 @@ wait_time = 5.0
 one_shot = true
 
 [node name="SheepTimer" type="Timer" parent="."]
-autostart = true
 
 [node name="LightningTimer" type="Timer" parent="."]
 
 [node name="Cowboy" parent="." instance=ExtResource("4_jb8n6")]
+
+[node name="HUD" parent="." instance=ExtResource("6_23cdu")]
 
 [connection signal="timeout" from="CageTimer" to="." method="spawn_new_cage"]
 [connection signal="timeout" from="SheepTimer" to="." method="spawn_random_sheep"]
