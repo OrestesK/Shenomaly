@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bvode3hd2efqi"]
+
+[ext_resource type="FontFile" uid="uid://cci0hwm4tm18n" path="res://fonts/FiveFontsatFreddy's-Regular.ttf" id="1_g6pju"]
+
+[resource]
+default_font = ExtResource("1_g6pju")
+default_font_size = 16

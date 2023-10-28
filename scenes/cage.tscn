@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1np7vko01cmp"]
+[gd_scene load_steps=5 format=3 uid="uid://c1np7vko01cmp"]
 
 [ext_resource type="Script" path="res://scenes/cage.gd" id="1_4w62o"]
 [ext_resource type="Texture2D" uid="uid://x4tsxk4fhv62" path="res://assets/sprites/cage.jpg" id="1_g6sap"]
+[ext_resource type="Theme" uid="uid://bvode3hd2efqi" path="res://themes/shenomaly_theme.tres" id="3_7p0tl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jmjxm"]
 size = Vector2(144, 110)
@@ -20,4 +21,36 @@ texture = ExtResource("1_g6sap")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_jmjxm")
 
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="Canvas" type="Control" parent="."]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("3_7p0tl")
+
+[node name="Sheep" type="Label" parent="Canvas"]
+offset_left = -17.0
+offset_top = 30.0
+offset_right = 23.0
+offset_bottom = 67.0
+text = "0/5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RemainingTime" type="Label" parent="Canvas"]
+layout_mode = 0
+offset_left = -17.0
+offset_top = -55.0
+offset_right = 23.0
+offset_bottom = -18.0
+text = "10 "
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]

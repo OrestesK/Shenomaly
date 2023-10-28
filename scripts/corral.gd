@@ -6,12 +6,14 @@ extends Node2D
 @export var spawn_bounds: Vector4
 
 var _cage: Node
+var _captured_sheep = 0
 
 func _ready():
 	$CageTimer.start()
 
-func on_cage_full():
-	_cage.queue_free()
+func on_cage_done(count: int):
+	#cage should despawn itself, just call the timer to spawn the next one
+	_captured_sheep += count
 	$CageTimer.start()
 
 func spawn_random_sheep():
@@ -28,5 +30,5 @@ func spawn_new_cage():
 	"""
 	_cage = cage_scene.instantiate()
 	_cage.position = Vector2(randf_range(spawn_bounds.x, spawn_bounds.z), randf_range(spawn_bounds.y, spawn_bounds.w))
-	_cage.register_end_callback(on_cage_full)
+	_cage.register_end_callback(on_cage_done)
 	add_child(_cage)
