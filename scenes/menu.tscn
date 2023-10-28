@@ -35,10 +35,12 @@ color = Color(0.67451, 0.658824, 0.839216, 1)
 [node name="Cowboy" parent="." instance=ExtResource("2_lhl7b")]
 position = Vector2(328, 350)
 scale = Vector2(8, 8)
+move = false
 
 [node name="Cowboy2" parent="." instance=ExtResource("2_lhl7b")]
 position = Vector2(943, 350)
 scale = Vector2(8, 8)
+move = false
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 2
