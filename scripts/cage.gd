@@ -31,7 +31,6 @@ func _on_body_entered(body):
 	
 	_count_text.text = COUNT_FORMAT % [_current_sheep, max_sheep]
 	
-	
 	if _current_sheep == max_sheep:
 		_end_cage()
 	
