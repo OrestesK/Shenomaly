@@ -31,7 +31,7 @@ func _physics_process(delta):
 	var collision = move_and_collide(velocity * delta)
 	
 	if collision:
-		if collision.get_collider().has_method("get_captured"):
+		if collision.get_collider().is_in_group("Sheep"):
 			collision.get_collider().get_captured()
 	
 

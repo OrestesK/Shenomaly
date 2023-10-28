@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c1np7vko01cmp"]
 
-[ext_resource type="Script" path="res://scenes/cage.gd" id="1_4w62o"]
 [ext_resource type="Texture2D" uid="uid://x4tsxk4fhv62" path="res://assets/sprites/cage.jpg" id="1_g6sap"]
+[ext_resource type="Script" path="res://scripts/cage.gd" id="1_l7320"]
 [ext_resource type="Theme" uid="uid://bvode3hd2efqi" path="res://themes/shenomaly_theme.tres" id="3_7p0tl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jmjxm"]
@@ -10,7 +10,7 @@ size = Vector2(144, 110)
 [node name="Cage" type="Area2D"]
 position = Vector2(-266, 0)
 collision_mask = 2
-script = ExtResource("1_4w62o")
+script = ExtResource("1_l7320")
 max_sheep = 5
 metadata/_edit_group_ = true
 
@@ -34,6 +34,7 @@ offset_bottom = 40.0
 theme = ExtResource("3_7p0tl")
 
 [node name="Sheep" type="Label" parent="Canvas"]
+layout_mode = 0
 offset_left = -17.0
 offset_top = 30.0
 offset_right = 23.0

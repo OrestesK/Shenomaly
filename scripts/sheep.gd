@@ -1,8 +1,12 @@
 extends CharacterBody2D
 
-@export var speed: float
-@export var max_rotation: float
+@export var roam_speed: float
+@export var roam_acceleration: float
+@export var fear_speed: float
+@export var fear_acceleration: float
+@export var max_turn_speed: float
 @export var max_turn_accel: float
+@export var max_avoidance: float
 
 var _sprite: AnimatedSprite2D
 var _detected: Array[CharacterBody2D] # array holding bodies in detection area
@@ -14,6 +18,7 @@ var _current_state = STATE.ROAMING
 
 var _turn_accel: float
 var _turn_speed: float = 0
+var _speed: float = roam_speed
 
 func register_sheep_captured_callback(callback: Callable):
 	_sheep_gone_callable = callback
@@ -24,43 +29,62 @@ func get_captured():
 
 # on creation
 func _ready():
-	_sprite = $sheep_sprite
-	velocity = Vector2(0, 1).rotated(randf() * 2 * PI) * speed
-	_turn_accel = max_rotation if randf() > 0.5 else -max_rotation
+	_sprite = $SheepSprite
+	velocity = Vector2(0, 1).rotated(randf_range(0, 2 * PI)) * roam_speed
+	_turn_accel = max_turn_accel if randf() > 0.5 else -max_turn_accel
 
 # every frame
 func _process(delta):
 	# plays the bop (idle) animation
 	_sprite.play("bop")
 	
+	_speed = clampf(_speed, roam_speed, fear_speed)
+	
 	match _current_state:
 		STATE.ROAMING:
-			# low chance of inverting turn_accel
-			_turn_accel = -_turn_accel if randf() > 0.6 else _turn_accel
-			# increases turn speed by a value
-			_turn_speed += clampf(_turn_accel * delta, -max_rotation, max_rotation)
-			# sets velocity
-			velocity = velocity.rotated(_turn_speed * delta).normalized() * speed
+			if _speed > roam_speed:
+				_speed -= roam_acceleration * delta
 			
+			# low chance of inverting turn_accel
+			_turn_accel = -_turn_accel if randf() > 0.7 else _turn_accel
+			# increases turn speed by a value
+			_turn_speed += clampf(_turn_accel * delta, -max_turn_speed, max_turn_speed)
+			# sets velocity
+			velocity = velocity.rotated(_turn_speed * delta).normalized() * _speed
 		STATE.FLEEING:
-				# for all bodies in area
-				for body in _detected:
-					# determines strength of repulsion
-					var strength = (3 / position.distance_to(body.position)) * 100
-					# repulses
-					velocity = -position.direction_to(body.position) * speed * strength
+			if _speed < fear_speed:
+				_speed += fear_acceleration * delta
+			
+			#calculate composite vector of all detected objects
+			var fear_dir = Vector2.ZERO
+			for body in _detected:
+				fear_dir += body.position.direction_to(position)
+			
+			velocity = fear_dir.normalized() * _speed
 	
 # moves the sheep with velocity
 func _physics_process(delta):
 	move_and_slide()
 	
+	# obstacle avoidance
+	$AvoidanceCaster.target_position = velocity
+	var collider = $AvoidanceCaster.get_collider()
+	if collider:
+		var desired_dir = $AvoidanceCaster.get_collision_normal()
+		var accel = (desired_dir * _speed - velocity)
+		var magnitude = clampf(accel.length(), 0, max_avoidance * delta)
+		accel = accel.normalized() * magnitude
+		velocity += accel
+	
 # detect when object enters detection area
 func _on_detection_area_body_entered(body):
-	_current_state = STATE.FLEEING
-	_detected.append(body)
+	if body.is_in_group("FearSource"):
+		_current_state = STATE.FLEEING
+		_detected.append(body)
 
 # detect when object exits detection area
 func _on_detection_area_body_exited(body):
-	_detected.erase(body)
-	if _detected.size() == 0:
-		_current_state = STATE.ROAMING
+	if body.is_in_group("FearSource"):
+		_detected.erase(body)
+		if _detected.size() == 0:
+			_current_state = STATE.ROAMING

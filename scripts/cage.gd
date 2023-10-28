@@ -21,7 +21,7 @@ func _process(delta):
 
 func _on_body_entered(body):
 	# assume the only objects that can collide are sheeps
-	if body.has_method("get_captured"):
+	if body.is_in_group("Sheep"):
 		body.get_captured()
 	_current_sheep += 1
 	
