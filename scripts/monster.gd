@@ -1,31 +1,39 @@
 extends CharacterBody2D
 
-@onready var _sprite = $MonsterSprite
+@export var speed: float
+
+var sprite: AnimatedSprite2D
+var detected: Array[CharacterBody2D] # array holding bodies in detection area
 
 var CHASING = false
 
-var chase_this: Array[CharacterBody2D]
-var speed = 25
+# on creation
+func _ready():
+	sprite = $MonsterSprite
 
+# every frame
 func _process(delta):
 	#plays the bop (idle) animation
-	_sprite.play("bop")
+	sprite.play("bop")
 	
 	if CHASING == true:
-		var player_direction = (chase_this[0].position - self.position).normalized()
-		velocity = speed * player_direction
-		move_and_slide()
+		velocity = position.direction_to(detected[0].position)
+		print(velocity)
 						
 		#choose sheep (player for now as it is the only thing there) closest
 		#go towards them
 
+# moves the monster with velocity
+func _physics_process(delta):
+	move_and_slide()
+
+# detect when object enters detection area
 func _on_area_body_entered(body):
 	CHASING = true
-	chase_this.append(body)
-	print(body)
+	detected.append(body)
 
-
+# detect when object leaves detection area
 func _on_area_body_exited(body):
-	chase_this.erase(body)
-	velocity = speed * 0
+	detected.erase(body)
+	velocity = Vector2(0,0)
 	CHASING = false

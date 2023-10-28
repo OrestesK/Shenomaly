@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://b5ucs6wrbrh1t"]
+[gd_scene load_steps=8 format=3 uid="uid://dndpvioyudhhl"]
 
-[ext_resource type="Texture2D" uid="uid://ddwm6d07qwxi" path="res://assets/sprites/Monster.png" id="1_im8ri"]
+[ext_resource type="Texture2D" uid="uid://cy5ibnrjpg8i" path="res://assets/sprites/Monster.png" id="1_im8ri"]
 [ext_resource type="Script" path="res://scripts/monster.gd" id="1_q7soi"]
-[ext_resource type="PackedScene" uid="uid://1knj7p4t1v2h" path="res://scenes/cowboy.tscn" id="3_mnfvg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nm1ux"]
+size = Vector2(48, 73)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q0wtt"]
 atlas = ExtResource("1_im8ri")
@@ -26,37 +28,31 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nm1ux"]
-size = Vector2(48, 73)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kqod1"]
-size = Vector2(500, 500)
+[sub_resource type="CircleShape2D" id="CircleShape2D_un0ke"]
+radius = 300.0
 
 [node name="Monster" type="CharacterBody2D"]
 texture_filter = 1
 collision_layer = 2
 up_direction = Vector2(0, 1)
 script = ExtResource("1_q7soi")
+speed = 30.0
+
+[node name="MonsterCollision" type="CollisionShape2D" parent="."]
+position = Vector2(357, 247)
+shape = SubResource("RectangleShape2D_nm1ux")
 
 [node name="MonsterSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(357, 242)
 sprite_frames = SubResource("SpriteFrames_p5m2m")
 animation = &"bop"
 
-[node name="MonsterCollision" type="CollisionShape2D" parent="."]
-position = Vector2(357, 247)
-shape = SubResource("RectangleShape2D_nm1ux")
-
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-13, 30)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(369, 221)
-shape = SubResource("RectangleShape2D_kqod1")
-
-[node name="Cowboy" parent="." instance=ExtResource("3_mnfvg")]
-position = Vector2(706, 280)
-up_direction = Vector2(0, 1)
+position = Vector2(368, 222)
+shape = SubResource("CircleShape2D_un0ke")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_body_exited"]
