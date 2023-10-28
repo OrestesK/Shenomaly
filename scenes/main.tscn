@@ -20,6 +20,7 @@ metadata/_edit_horizontal_guides_ = []
 position = Vector2(-4, -2)
 
 [node name="Corral" type="StaticBody2D" parent="."]
+collision_mask = 255
 script = ExtResource("3_htb7v")
 sheep_scene = ExtResource("1_fkc7i")
 spawn_bounds = Vector4(-570, -300, 570, 300)
