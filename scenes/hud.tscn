@@ -1,0 +1,85 @@
+[gd_scene load_steps=3 format=3 uid="uid://yr65f5hdo3a4"]
+
+[ext_resource type="Theme" uid="uid://bvode3hd2efqi" path="res://themes/shenomaly_theme.tres" id="1_6katx"]
+[ext_resource type="Script" path="res://scenes/hud.gd" id="1_xdnnp"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_xdnnp")
+
+[node name="Info" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_6katx")
+
+[node name="TopLeft" type="VBoxContainer" parent="Info"]
+layout_mode = 1
+offset_right = 150.0
+offset_bottom = 78.0
+
+[node name="Strikes" type="Label" parent="Info/TopLeft"]
+layout_mode = 2
+text = "Strikes :"
+
+[node name="SkillpointProgress" type="Label" parent="Info/TopLeft"]
+layout_mode = 2
+text = "Skillpoint: (0/3)"
+
+[node name="TopRight" type="VBoxContainer" parent="Info"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -188.0
+offset_bottom = 37.0
+grow_horizontal = 0
+
+[node name="Quota" type="Label" parent="Info/TopRight"]
+layout_mode = 2
+text = "Sheep Remaining: 60"
+horizontal_alignment = 2
+
+[node name="BottomLeft" type="VBoxContainer" parent="Info"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -119.0
+offset_right = 132.0
+grow_vertical = 0
+
+[node name="GunCooldown" type="Label" parent="Info/BottomLeft"]
+layout_mode = 2
+text = "GUN ready"
+
+[node name="KnockbackCooldown" type="Label" parent="Info/BottomLeft"]
+layout_mode = 2
+text = "ZAP ready"
+
+[node name="SprintCooldown" type="Label" parent="Info/BottomLeft"]
+layout_mode = 2
+text = "SPRINT ready"
+
+[node name="Center" type="VBoxContainer" parent="Info"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -35.5
+offset_right = 72.0
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EndText" type="Label" parent="Info/Center"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "You win!"
+horizontal_alignment = 1
+vertical_alignment = 1
