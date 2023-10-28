@@ -37,6 +37,7 @@ animations = [{
 }]
 
 [node name="Cowboy" type="CharacterBody2D"]
+collision_layer = 4
 script = ExtResource("1_cf3rq")
 speed = 200
 

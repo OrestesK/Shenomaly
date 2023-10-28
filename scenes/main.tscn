@@ -26,6 +26,7 @@ sheep_scene = ExtResource("1_fkc7i")
 spawn_bounds = Vector4(-570, -300, 570, 300)
 
 [node name="Walls" type="StaticBody2D" parent="Corral"]
+collision_mask = 15
 
 [node name="Wall1" type="CollisionShape2D" parent="Corral/Walls"]
 position = Vector2(-589, 6)

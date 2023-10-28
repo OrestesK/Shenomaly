@@ -34,7 +34,9 @@ radius = 75.0
 [node name="sheep" type="CharacterBody2D"]
 position = Vector2(26, -57)
 collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_nwcdf")
+speed = 50.0
 max_rotation = 0.8
 max_turn_accel = 2.0
 
@@ -48,6 +50,8 @@ sprite_frames = SubResource("SpriteFrames_8d542")
 animation = &"bop"
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_nrjeg")
