@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bmjip7nsmy66e"]
 
 [ext_resource type="Script" path="res://scripts/sheep.gd" id="1_nwcdf"]
-[ext_resource type="Texture2D" uid="uid://ctk35217esrk2" path="res://assets/sprites/sheep.png" id="2_ikmjs"]
+[ext_resource type="Texture2D" uid="uid://b0tt0mtaydwux" path="res://assets/sprites/sheep.png" id="2_ikmjs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cmmma"]
 size = Vector2(30, 19)
@@ -28,13 +28,15 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vgp30"]
-size = Vector2(100, 100)
+[sub_resource type="CircleShape2D" id="CircleShape2D_nrjeg"]
+radius = 100.0
 
 [node name="sheep" type="CharacterBody2D"]
 position = Vector2(26, -57)
 collision_layer = 2
 script = ExtResource("1_nwcdf")
+max_rotation = 0.8
+max_turn_accel = 2.0
 
 [node name="sheep_collision" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0.5)
@@ -48,7 +50,7 @@ animation = &"bop"
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_vgp30")
+shape = SubResource("CircleShape2D_nrjeg")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_detection_area_body_exited"]
