@@ -14,7 +14,6 @@ func set_sprite():
 		return
 	
 	var angle = velocity.angle()
-	print(angle)
 	
 	if angle == 0:
 		sprite.set_flip_h( false )
