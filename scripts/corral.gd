@@ -19,6 +19,8 @@ var _captured_sheep = 0
 var _strikes = 2
 var _sheep: Array[CharacterBody2D]
 
+const lightning_height = 800
+
 func _ready():
 	start_game()
 
@@ -91,20 +93,32 @@ func spawn_new_cage():
 	add_child(_cage)
 
 func on_lightning_strike():
+
+	
+	
 	print("Spawning monster")
 	var sheep_index := randi_range(0, len(_sheep) - 1)
 	var sheep := _sheep[sheep_index]
+	
+
+	$LightningStrike.play()
+	$LightningStrike.position = sheep.position - Vector2(0, lightning_height / 2)
+	
 	_sheep.remove_at(sheep_index)
 	sheep.process_mode = PROCESS_MODE_DISABLED
 	var spawn_pos := sheep.position
 	sheep.queue_free()
 	
-	var monster = monster_scene.instantiate()
-	monster.sheep = _sheep
-	monster.position = spawn_pos
-	add_child(monster)
+	$LightningEndTimer.start()
+	
 	
 	$LightningTimer.start(randf_range(lightning_range.x, lightning_range.y))
+
+func on_lightning_strike_end():
+	var monster = monster_scene.instantiate()
+	monster.sheep = _sheep
+	monster.position = $LightningStrike.position + Vector2(0, lightning_height / 2 - 64/2)
+	add_child(monster)
 
 func _on_cowboy_gun_used():
 	$GunCd.start()

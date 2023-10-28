@@ -20,9 +20,12 @@ const NORTH_WEST = -3 * PI / 4
 const NORTH = -PI / 2
 const NORTH_EAST = -PI / 4
 
+var stuck_time = 0.3
+
 # on creation
 func _ready():
 	_sprite = $MonsterSprite
+	_sprite.play("bopFront")
 
 # Check if a is within error of b
 func within(a, b, error):
@@ -66,6 +69,9 @@ func set_sprite():
 
 # every frame
 func _process(delta):
+	if stuck_time > 0:
+		stuck_time -= delta
+		return
 	#plays the bop (idle) animation
 	set_sprite()
 	

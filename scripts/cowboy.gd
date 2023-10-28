@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var walk_speed = 100
 @export var sprint_speed = 200
+@export var move = true
 var sprite: AnimatedSprite2D
 
 signal sprint_used
@@ -107,5 +108,6 @@ func ready_knockback():
 	_knockback_ready = true
 
 func _physics_process(delta):
-	get_input()
-	move_and_slide()
+	if move:
+		get_input()
+		move_and_slide()

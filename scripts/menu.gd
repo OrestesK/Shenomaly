@@ -7,9 +7,9 @@ var arrow3: Label
 var current = 0
 
 func _ready():
-	arrow1 = $CenterContainer/VBoxContainer/CenterContainer/VBoxContainer/Container1/HBoxContainer/Arrow1
-	arrow2 = $CenterContainer/VBoxContainer/CenterContainer/VBoxContainer/Container2/HBoxContainer/Arrow2
-	arrow3 = $CenterContainer/VBoxContainer/CenterContainer/VBoxContainer/Container3/HBoxContainer/Arrow3
+	arrow1 = $MenuContainer/VBoxContainer/CenterContainer/VBoxContainer/Container1/HBoxContainer/Arrow1
+	arrow2 = $MenuContainer/VBoxContainer/CenterContainer/VBoxContainer/Container2/HBoxContainer/Arrow2
+	arrow3 = $MenuContainer/VBoxContainer/CenterContainer/VBoxContainer/Container3/HBoxContainer/Arrow3
 
 func handle_selection():
 	match current:

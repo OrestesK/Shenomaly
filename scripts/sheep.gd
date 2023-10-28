@@ -35,10 +35,18 @@ func _ready():
 	velocity = Vector2(0, 1).rotated(randf_range(0, 2 * PI)) * roam_speed
 	_turn_accel = max_turn_accel if randf() > 0.5 else -max_turn_accel
 
+func set_sprite():
+	var angle = velocity.angle()
+	if angle > -PI/2 and angle < PI/2:
+		_sprite.set_flip_h( false )
+	else:
+		_sprite.set_flip_h( true )
+		
+	_sprite.play("bop")
 # every frame
 func _process(delta):
 	# plays the bop (idle) animation
-	_sprite.play("bop")
+	set_sprite()
 	
 	_speed = clampf(_speed, roam_speed, fear_speed)
 	
