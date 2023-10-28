@@ -40,10 +40,8 @@ func _process(delta):
 #				velocity = position.direction_to(random_target_pos) * MAX_SPEED
 		FLEEING:
 			for body in flee_from:
-				#TODO MAKE ANOTHER FORMULA FOR THIS
 				#determines strength of repulsion
 				var strength = (3 / position.distance_to(body.position)) * 100
-				print(strength)
 				#clamps streght
 				#strength = clampf(strength, 0, 2);
 				#repulses

@@ -38,6 +38,7 @@ animations = [{
 
 [node name="Cowboy" type="CharacterBody2D"]
 script = ExtResource("1_cf3rq")
+speed = 200
 
 [node name="CowboyCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_il1rs")
