@@ -36,12 +36,10 @@ func _on_detection_area_body_entered(body):
 	current_state = FLEEING
 	flee_from.append(body)
 
-
+#detect when object exits
 func _on_detection_area_body_exited(body):
+	flee_from.erase(body)
 	if flee_from.size() == 0:
 		current_state = ROAMING
-	print(flee_from.size())
-	flee_from.erase(body)
-	print(flee_from.size())
 	
 	random_target_pos = position
