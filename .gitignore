@@ -2,6 +2,7 @@
 .godot/
 export/
 game.zip
+Title.png
 
 # Godot-specific ignores
 .import/
