@@ -4,6 +4,7 @@ extends Node2D
 @export var max_sheep = 30
 @export var sheep_quota = 10
 @export var sp_per_perk = 3
+@export var lives = 3
 
 @export_category("Random Settings")
 #vector of min_x, min_y, max_x, max_y
@@ -40,6 +41,7 @@ func _process(delta):
 	$HUD.set_sprint_cooldown($SprintCd.time_left)
 
 func start_game():
+	_strikes = lives
 	$SheepTimer.start()
 	$CageTimer.start()
 	$LightningTimer.start(randf_range(lightning_range.x, lightning_range.y))

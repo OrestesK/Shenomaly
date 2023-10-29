@@ -239,8 +239,8 @@ animations = [{
 
 [node name="Corral" type="Node2D"]
 script = ExtResource("1_aws85")
-sheep_quota = 1
-sp_per_perk = 1
+sheep_quota = 100
+sp_per_perk = 2
 spawn_bounds = Vector4(-500, -250, 500, 250)
 lightning_range = Vector2(12, 16)
 cage_scene = ExtResource("2_6mnav")
@@ -250,6 +250,7 @@ monster_scene = ExtResource("4_fnipf")
 menu_scene = "res://scenes/menu.tscn"
 
 [node name="Gameplay" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
 stream = ExtResource("6_lnuj1")
 
 [node name="BackgroundContainer" type="MarginContainer" parent="."]
