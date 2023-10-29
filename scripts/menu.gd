@@ -6,12 +6,13 @@ var arrow1: Label
 var arrow2: Label
 var arrow3: Label
 var current = 0
-
+@onready var titleScreen = $TitleScreen
 func _ready():
 	settings = $Settings
 	arrow1 = $MenuContainer/VBoxContainer/CenterContainer/VBoxContainer/Container1/HBoxContainer/Arrow1
 	arrow2 = $MenuContainer/VBoxContainer/CenterContainer/VBoxContainer/Container2/HBoxContainer/Arrow2
 	arrow3 = $MenuContainer/VBoxContainer/CenterContainer/VBoxContainer/Container3/HBoxContainer/Arrow3
+	titleScreen.play()
 
 func handle_selection():
 	match current:

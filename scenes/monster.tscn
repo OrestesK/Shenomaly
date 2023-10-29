@@ -192,3 +192,6 @@ pitch_scale = 1.15
 [node name="MonsterSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p5m2m")
 animation = &"bopBack"
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
