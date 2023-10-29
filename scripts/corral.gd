@@ -3,6 +3,7 @@ extends Node2D
 @export_category("Overall Settings")
 @export var max_sheep = 30
 @export var sheep_quota = 10
+@export var sp_per_perk = 3
 
 @export_category("Random Settings")
 #vector of min_x, min_y, max_x, max_y
@@ -21,8 +22,11 @@ var _cage_falling: Node
 var _captured_sheep = 0
 var _strikes = 2
 var _sheep: Array[CharacterBody2D]
+var _skillpoints = 0
 
 const lightning_height = 800
+
+var _perk_selection: Array[SkillSettings.PERKS]
 
 func _ready():
 	start_game()
@@ -43,7 +47,7 @@ func start_game():
 	$HUD.set_gun_cooldown(0.0)
 	$HUD.set_knockback_cooldown(0.0)
 	$HUD.set_sprint_cooldown(0.0)
-	$HUD.set_skillpoint_progress(0, 3)
+	$HUD.set_skillpoint_progress(0, sp_per_perk)
 	$HUD.hide_end_text()
 
 func stop_game(won: bool):
@@ -64,6 +68,8 @@ func on_cage_done(count: int, give_strike: bool):
 	if give_strike:
 		_strikes -=1
 		$HUD.set_strikes(_strikes)
+	else:
+		_skillpoints += 1
 	
 	if _strikes == 0:
 		stop_game(false)
@@ -71,6 +77,21 @@ func on_cage_done(count: int, give_strike: bool):
 		stop_game(true)
 	else:
 		$CageTimer.start()
+		
+	# handle perks appearing
+	if _skillpoints >= sp_per_perk:
+		_display_perks()
+
+func _display_perks():
+	get_tree().paused = true
+	_perk_selection = SkillSettings.generate_perks()
+	$HUD.set_perks(_perk_selection)
+	$HUD.display_skills(true)
+	
+func on_pick_perk(index: int):
+	SkillSettings.apply_perk(_perk_selection[index])
+	$HUD.display_skills(false)
+	get_tree().paused = false
 
 func on_sheep_removed(sheep: CharacterBody2D):
 	_sheep.erase(sheep)
@@ -102,14 +123,9 @@ func spawn_new_cage():
 	add_child(_cage)
 
 func on_lightning_strike():
-
-	
-	
-	print("Spawning monster")
 	var sheep_index := randi_range(0, len(_sheep) - 1)
 	var sheep := _sheep[sheep_index]
 	
-
 	$LightningStrike.play()
 	$LightningStrike.position = sheep.position - Vector2(0, lightning_height / 2)
 	

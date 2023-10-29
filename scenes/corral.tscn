@@ -238,6 +238,7 @@ animations = [{
 
 [node name="Corral" type="Node2D"]
 script = ExtResource("1_aws85")
+sp_per_perk = 1
 spawn_bounds = Vector4(-500, -250, 500, 250)
 lightning_range = Vector2(12, 16)
 cage_scene = ExtResource("2_6mnav")
@@ -334,3 +335,4 @@ animation = &"strike"
 [connection signal="gun_used" from="Cowboy" to="." method="_on_cowboy_gun_used"]
 [connection signal="knockback_used" from="Cowboy" to="." method="_on_cowboy_knockback_used"]
 [connection signal="sprint_used" from="Cowboy" to="." method="_on_cowboy_sprint_used"]
+[connection signal="perk_picked" from="HUD" to="." method="on_pick_perk"]

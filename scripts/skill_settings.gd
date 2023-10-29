@@ -12,11 +12,14 @@ enum PERKS {GUN_CD, SPRINT_CD, ZAP_CD, AIM_T, STUN_MULT, ZAP_RANGE, SPRINT_SPEED
 
 # creates a list of 3 perks to pick from
 func generate_perks():
-	var options = []
-	for i in range(3):
-		options.append(PERKS.keys()[randi_range(0, len(PERKS.keys()) - 1)])
+	var options: Array[int] = []
+	while len(options) != 3:
+		var perk = PERKS.values()[randi_range(0, len(PERKS.values()) - 1)]
+		if not perk in options:
+			options.append(perk)
 	return options
-	
+
+# applies a given perk
 func apply_perk(perk: PERKS):
 	match perk:
 		PERKS.GUN_CD:

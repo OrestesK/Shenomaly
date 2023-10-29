@@ -85,7 +85,6 @@ func _use_zap():
 	_knockback_ready = false
 	
 	for body in $ZapArea.get_overlapping_bodies():
-		print(body.name)
 		if body.has_method("stun"):
 			body.stun()
 	
