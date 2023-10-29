@@ -31,6 +31,7 @@ func _ready():
 	$Target.hide()
 	_sprite = $MonsterSprite
 	_sprite.play("bopFront")
+	$Zap.hide()
 
 # Check if a is within error of b
 func within(a, b, error):
@@ -111,6 +112,8 @@ func _on_mouse_exited():
 func stun():
 	$StunTimer.start(stun_time * SkillSettings.stun_time_multiplier)
 	_stunned = true
+	$Zap.show()
 
 func _on_stun_timer_timeout():
 	_stunned = false
+	$Zap.hide()
