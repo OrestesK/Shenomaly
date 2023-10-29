@@ -97,7 +97,7 @@ func _on_detection_area_body_entered(body):
 		_detected.append(body)
 		if _current_state != STATE.STUN:
 			_current_state = STATE.FLEEING
-			sheepbaah.play()
+			#sheepbaah.play()
 
 # detect when object exits detection area
 func _on_detection_area_body_exited(body):
@@ -117,3 +117,9 @@ func _on_stun_timer_timeout():
 	else:
 		_current_state = STATE.FLEEING
 		
+
+
+
+func _on_baaah_timer_timeout():
+	if randi_range(0,8) == 0:
+		$SheepBaaah.play()
