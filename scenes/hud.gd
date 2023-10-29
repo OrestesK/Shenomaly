@@ -2,7 +2,7 @@ extends CanvasLayer
 
 const STRIKES_FORMAT = "Strikes: %s"
 const QUOATA_FORMAT = "Sheep remaining: %d"
-const SKILLPOINT_FORMAT = "Skillpoint progress: (%d,%d)"
+const SKILLPOINT_FORMAT = "Skillpoint progress: (%d/%d)"
 const COOLDOWN_FORMAT = "%s available in %ds"
 const COOLDOWN_READY_FORMAT = "%s ready"
 

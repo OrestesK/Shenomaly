@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://bvode3hd2efqi" path="res://themes/shenomaly_theme.tres" id="1_6katx"]
 [ext_resource type="Script" path="res://scenes/hud.gd" id="1_xdnnp"]
-[ext_resource type="LabelSettings" path="res://scenes/accent_label.tres" id="3_17eie"]
+[ext_resource type="LabelSettings" uid="uid://bbyunn4u3f306" path="res://scenes/accent_label.tres" id="3_17eie"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_xdnnp")

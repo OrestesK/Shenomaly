@@ -80,6 +80,7 @@ func _fire_gun():
 	SelectMonster.select_monster.queue_free()
 	
 func _use_zap():
+	$ZapArea.scale = Vector2(SkillSettings.zap_range_multiplier, SkillSettings.zap_range_multiplier)
 	knockback_used.emit()
 	_knockback_ready = false
 	
@@ -100,7 +101,7 @@ func _process(_delta):
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
-	velocity = input_direction * (walk_speed if $SprintTimer.is_stopped() else sprint_speed)
+	velocity = input_direction * (walk_speed if $SprintTimer.is_stopped() else sprint_speed * SkillSettings.sprint_speed_multiplier)
 
 func ready_sprint():
 	_sprint_ready = true

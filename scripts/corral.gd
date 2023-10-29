@@ -130,13 +130,13 @@ func on_lightning_strike_end():
 	add_child(monster)
 
 func _on_cowboy_gun_used():
-	$GunCd.start()
+	$GunCd.start(SkillSettings.gun_cooldown)
 
 func _on_cowboy_knockback_used():
-	$KnockbackCd.start()
+	$KnockbackCd.start(SkillSettings.zap_cooldown)
 
 func _on_cowboy_sprint_used():
-	$SprintCd.start()
+	$SprintCd.start(SkillSettings.sprint_cooldown)
 
 func _on_knockback_cd_timeout():
 	$Cowboy.ready_knockback()
