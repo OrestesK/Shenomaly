@@ -33,6 +33,7 @@ func _ready():
 	$AimBar.scale = Vector2(0, 0.2)
 	sprite = $CowboySprite
 	$Gun.set_frame(2)
+	$ZapArea/AOE.modulate.a = 0
 	
 # Check if a is within error of b
 func within(a, b, error):
@@ -112,6 +113,9 @@ func _on_aim_timer_timeout():
 
 func _use_zap():
 	$ZapArea.scale = Vector2(SkillSettings.zap_range_multiplier, SkillSettings.zap_range_multiplier)
+	#$AOE.scale = $ZapArea.scale * 2.35
+	$ZapArea/AOE.modulate.a = 1
+	get_tree().create_tween().tween_property($ZapArea/AOE, "modulate", Color.TRANSPARENT, 0.2)
 	knockback_used.emit()
 	_knockback_ready = false
 	

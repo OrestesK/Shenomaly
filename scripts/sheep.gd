@@ -36,6 +36,7 @@ func _ready():
 	_sprite = $SheepSprite
 	velocity = Vector2(0, 1).rotated(randf_range(0, 2 * PI)) * roam_speed
 	_turn_accel = max_turn_accel if randf() > 0.5 else -max_turn_accel
+	$Zap.hide()
 
 func set_sprite():
 	var angle = velocity.angle()
@@ -109,8 +110,10 @@ func _on_detection_area_body_exited(body):
 func stun():
 	_current_state = STATE.STUN
 	$StunTimer.start(stun_time * SkillSettings.stun_time_multiplier)
+	$Zap.show()
 
 func _on_stun_timer_timeout():
+	$Zap.hide()
 	if _detected.size() == 0:
 		_current_state = STATE.ROAMING
 		velocity = Vector2(0, 1).rotated(randf_range(0, 2 * PI)) * roam_speed

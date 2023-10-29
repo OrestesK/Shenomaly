@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bmjip7nsmy66e"]
+[gd_scene load_steps=10 format=3 uid="uid://bmjip7nsmy66e"]
 
 [ext_resource type="Script" path="res://scripts/sheep.gd" id="1_nwcdf"]
 [ext_resource type="Texture2D" uid="uid://ctk35217esrk2" path="res://assets/sprites/sheep.png" id="2_ikmjs"]
 [ext_resource type="AudioStream" uid="uid://bjdggek1pm3kv" path="res://assets/SoundAffects/sheepbaaah.mp3" id="3_js2bv"]
+[ext_resource type="Texture2D" uid="uid://ctl6muwcr4kt3" path="res://assets/sprites/Zap.png" id="4_w8onl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xfplm"]
 radius = 7.5
@@ -75,6 +76,11 @@ one_shot = true
 [node name="BaaahTimer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
+
+[node name="Zap" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1, -16)
+texture = ExtResource("4_w8onl")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_detection_area_body_exited"]
