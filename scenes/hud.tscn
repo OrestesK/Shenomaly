@@ -31,11 +31,12 @@ label_settings = ExtResource("3_17eie")
 
 [node name="Shadow1" type="ColorRect" parent="Info/TopLeft/Strikes"]
 z_index = -1
-layout_mode = 2
-offset_left = -10.0
-offset_top = -4.0
-offset_right = 110.0
-offset_bottom = 26.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0, 0, 0, 0.392157)
 
 [node name="SkillpointProgress" type="Label" parent="Info/TopLeft"]
@@ -45,11 +46,12 @@ label_settings = ExtResource("3_17eie")
 
 [node name="Shadow2" type="ColorRect" parent="Info/TopLeft/SkillpointProgress"]
 z_index = -1
-layout_mode = 0
-offset_left = -10.0
-offset_top = -4.0
-offset_right = 250.0
-offset_bottom = 26.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0, 0, 0, 0.392157)
 
 [node name="TopRight" type="VBoxContainer" parent="Info"]
@@ -80,6 +82,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.392157)
 
 [node name="BottomLeft" type="VBoxContainer" parent="Info"]
+custom_minimum_size = Vector2(240, 0)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -93,42 +96,48 @@ grow_vertical = 0
 layout_mode = 2
 text = "GUN ready"
 label_settings = ExtResource("3_17eie")
+vertical_alignment = 1
 
 [node name="Shadow3" type="ColorRect" parent="Info/BottomLeft/GunCooldown"]
 z_index = -1
-layout_mode = 0
-offset_left = -10.0
-offset_top = -4.0
-offset_right = 110.0
-offset_bottom = 26.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0, 0, 0, 0.392157)
 
 [node name="KnockbackCooldown" type="Label" parent="Info/BottomLeft"]
 layout_mode = 2
 text = "ZAP ready"
 label_settings = ExtResource("3_17eie")
+vertical_alignment = 1
 
 [node name="Shadow4" type="ColorRect" parent="Info/BottomLeft/KnockbackCooldown"]
 z_index = -1
-layout_mode = 0
-offset_left = -10.0
-offset_top = -4.0
-offset_right = 110.0
-offset_bottom = 26.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0, 0, 0, 0.392157)
 
 [node name="SprintCooldown" type="Label" parent="Info/BottomLeft"]
 layout_mode = 2
 text = "SPRINT ready"
 label_settings = ExtResource("3_17eie")
+vertical_alignment = 1
 
 [node name="Shadow5" type="ColorRect" parent="Info/BottomLeft/SprintCooldown"]
 z_index = -1
-layout_mode = 0
-offset_left = -10.0
-offset_top = -4.0
-offset_right = 140.0
-offset_bottom = 26.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0, 0, 0, 0.392157)
 
 [node name="EndScreen" type="VBoxContainer" parent="Info"]
