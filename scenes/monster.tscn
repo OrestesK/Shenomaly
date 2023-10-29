@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dndpvioyudhhl"]
+[gd_scene load_steps=30 format=3 uid="uid://dndpvioyudhhl"]
 
 [ext_resource type="Texture2D" uid="uid://ddwm6d07qwxi" path="res://assets/sprites/Monster.png" id="1_im8ri"]
 [ext_resource type="Script" path="res://scripts/monster.gd" id="1_q7soi"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dfqf1tk2qtc6o" path="res://assets/sprites/Monster Back.png" id="3_hdl8h"]
 [ext_resource type="Texture2D" uid="uid://b2o2a125ri6pi" path="res://assets/sprites/Monster_Walk.png" id="4_cy3uf"]
 [ext_resource type="Texture2D" uid="uid://dwkpshn1wyfah" path="res://assets/sprites/Monster_Walk_Back.png" id="4_lybn0"]
+[ext_resource type="AudioStream" uid="uid://sr14foe6tfib" path="res://assets/SoundAffects/lightning.mp3" id="7_0fcpw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nm1ux"]
 size = Vector2(48, 73)
@@ -196,6 +197,9 @@ animation = &"bopBack"
 
 [node name="StunTimer" type="Timer" parent="."]
 wait_time = 2.0
+
+[node name="Lightning" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_0fcpw")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

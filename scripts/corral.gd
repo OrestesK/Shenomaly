@@ -23,7 +23,6 @@ var _captured_sheep = 0
 var _strikes = 2
 var _sheep: Array[CharacterBody2D]
 var _skillpoints = 0
-
 const lightning_height = 800
 
 var _perk_selection: Array[SkillSettings.PERKS]
@@ -125,7 +124,7 @@ func spawn_new_cage():
 func on_lightning_strike():
 	var sheep_index := randi_range(0, len(_sheep) - 1)
 	var sheep := _sheep[sheep_index]
-	
+	CameraMain.camera.shake(0.2, 1)
 	$LightningStrike.play()
 	$LightningStrike.position = sheep.position - Vector2(0, lightning_height / 2)
 	

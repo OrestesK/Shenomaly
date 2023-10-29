@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var monsterMoan =  $MonsterCollision/MonsterMoan
 
 @export var stun_time = 2
+@onready var lightning = $Lightning
 
 var _sprite: AnimatedSprite2D
 var _detected: Array[CharacterBody2D] # array holding bodies in detection area
@@ -28,6 +29,7 @@ var _stunned = false
 
 # on creation
 func _ready():
+	lightning.play()
 	_sprite = $MonsterSprite
 	_sprite.play("bopFront")
 
