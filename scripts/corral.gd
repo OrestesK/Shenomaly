@@ -4,6 +4,7 @@ extends Node2D
 @export var max_sheep = 30
 @export var sheep_quota = 10
 @export var sp_per_perk = 3
+@export var lives = 3
 
 @export_category("Random Settings")
 #vector of min_x, min_y, max_x, max_y
@@ -15,6 +16,7 @@ extends Node2D
 @export var cage_falling_scene: PackedScene
 @export var sheep_scene: PackedScene
 @export var monster_scene: PackedScene
+@export_file("*.tscn") var menu_scene: String
 @onready var gamePlay = $Gameplay
 
 var _cage: Node
@@ -30,6 +32,7 @@ var _perk_selection: Array[SkillSettings.PERKS]
 func _ready():
 	start_game()
 	gamePlay.play()
+	$CageTop.position.y = -2000
 
 func _process(delta):
 	$HUD.set_gun_cooldown($GunCd.time_left)
@@ -37,9 +40,16 @@ func _process(delta):
 	$HUD.set_sprint_cooldown($SprintCd.time_left)
 
 func start_game():
+	_strikes = lives
 	$SheepTimer.start()
 	$CageTimer.start()
 	$LightningTimer.start(randf_range(lightning_range.x, lightning_range.y))
+	
+	SkillSettings.reset_perks()
+	
+	$Cowboy.ready_knockback()
+	$Cowboy.ready_gun()
+	$Cowboy.ready_sprint()
 	
 	$HUD.set_strikes(_strikes)
 	$HUD.set_quota_remaining(sheep_quota)
@@ -53,10 +63,16 @@ func stop_game(won: bool):
 	get_tree().call_group("Monster", "queue_free")
 	get_tree().call_group("Sheep", "queue_free")
 	
+	_sheep.clear()
+	
 	$HUD.show_end_text("You win!" if won else "You're fired!")
 	$SheepTimer.stop()
 	$CageTimer.stop()
 	$LightningTimer.stop()
+	$LightningEndTimer.stop()
+	$KnockbackCd.stop()
+	$GunCd.stop()
+	$SprintCd.stop()
 
 func on_cage_done(count: int, give_strike: bool):
 	#cage should despawn itself, just call the timer to spawn the next one
@@ -111,19 +127,32 @@ func spawn_new_cage():
 	"""
 	Randomly spawns a cage using the spawn bounds
 	"""
-	_cage_falling = cage_falling_scene.instantiate()
+	#_cage_falling = cage_falling_scene.instantiate()
 	#for n in 10000:
 	#	cage_falling.position += Vector2(0, -11)
 	#cage_falling.queue_free()
 	
 	_cage = cage_scene.instantiate()
 	_cage.position = Vector2(randf_range(spawn_bounds.x, spawn_bounds.z), randf_range(spawn_bounds.y, spawn_bounds.w))
+	$CageTop.position.x = _cage.position.x
+	get_tree().create_tween().tween_property($CageTop, "position", _cage.position - Vector2(0, 1280/2 * 2 - 64), 1)
+	
+	$CageFalling.start()
+	
+	
+
+func open_cage():
+	get_tree().create_tween().tween_property($CageTop, "position", _cage.position + Vector2(0, -2000), 1)
 	_cage.register_end_callback(on_cage_done)
 	add_child(_cage)
 
 func on_lightning_strike():
-	var sheep_index := randi_range(0, len(_sheep) - 1)
+	var sheep_index := 0
 	var sheep := _sheep[sheep_index]
+	while (sheep.position.y - 64/2 < -250):
+		sheep_index = randi_range(0, len(_sheep) - 1)
+		sheep = _sheep[sheep_index]
+	
 	$LightningStrike.play()
 	$LightningStrike.position = sheep.position - Vector2(0, lightning_height / 2)
 	
@@ -161,6 +190,9 @@ func _on_gun_cd_timeout():
 func _on_sprint_cd_timeout():
 	$Cowboy.ready_sprint()
 
-
 func _on_lightning_shake_timer_timeout():
+	$Lightning.play()
 	CameraMain.camera.shake(.5, 2)
+	
+func _on_hud_main_menu():
+	get_tree().change_scene_to_file(menu_scene)

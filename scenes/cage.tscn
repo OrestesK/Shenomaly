@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://c1np7vko01cmp"]
+[gd_scene load_steps=7 format=3 uid="uid://c1np7vko01cmp"]
 
 [ext_resource type="Script" path="res://scripts/cage.gd" id="1_l7320"]
 [ext_resource type="Texture2D" uid="uid://bkfabtfchxlu" path="res://assets/sprites/Cage_Bottom.png" id="2_q080q"]
 [ext_resource type="Theme" uid="uid://bvode3hd2efqi" path="res://themes/shenomaly_theme.tres" id="3_7p0tl"]
 [ext_resource type="AudioStream" uid="uid://ixhxn7qlun2x" path="res://assets/SoundAffects/CageThump.mp3" id="3_l54l0"]
+[ext_resource type="Texture2D" uid="uid://y1nxritwkwit" path="res://assets/sprites/Cage_Top.png" id="5_muyih"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jmjxm"]
 size = Vector2(128, 128)
@@ -13,8 +14,8 @@ texture_filter = 1
 position = Vector2(-266, 0)
 collision_mask = 2
 script = ExtResource("1_l7320")
-max_sheep = 5
-min_quota = 4
+max_sheep = 6
+min_quota = 6
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -26,6 +27,7 @@ shape = SubResource("RectangleShape2D_jmjxm")
 
 [node name="DespawnTimer" type="Timer" parent="."]
 wait_time = 15.0
+one_shot = true
 autostart = true
 
 [node name="CageThump" type="AudioStreamPlayer2D" parent="."]
@@ -61,5 +63,16 @@ text = "10 "
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="CageTop" type="Sprite2D" parent="."]
+z_index = 9
+texture_filter = 1
+position = Vector2(0, -1216)
+scale = Vector2(2, 2)
+texture = ExtResource("5_muyih")
+
+[node name="CageTopTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]
+[connection signal="timeout" from="CageTopTimer" to="." method="_on_cage_top_timer_timeout"]

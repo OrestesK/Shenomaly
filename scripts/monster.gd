@@ -4,7 +4,6 @@ extends CharacterBody2D
 @onready var monsterMoan =  $MonsterCollision/MonsterMoan
 
 @export var stun_time = 2
-@onready var lightning = $Lightning
 
 var _sprite: AnimatedSprite2D
 var _detected: Array[CharacterBody2D] # array holding bodies in detection area
@@ -29,9 +28,10 @@ var _stunned = false
 
 # on creation
 func _ready():
-	lightning.play()
+	$Target.hide()
 	_sprite = $MonsterSprite
 	_sprite.play("bopFront")
+	$Zap.hide()
 
 # Check if a is within error of b
 func within(a, b, error):
@@ -112,6 +112,8 @@ func _on_mouse_exited():
 func stun():
 	$StunTimer.start(stun_time * SkillSettings.stun_time_multiplier)
 	_stunned = true
+	$Zap.show()
 
 func _on_stun_timer_timeout():
 	_stunned = false
+	$Zap.hide()

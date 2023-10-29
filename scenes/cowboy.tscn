@@ -1,11 +1,13 @@
-[gd_scene load_steps=27 format=3 uid="uid://1knj7p4t1v2h"]
+[gd_scene load_steps=33 format=3 uid="uid://1knj7p4t1v2h"]
 
 [ext_resource type="Script" path="res://scripts/cowboy.gd" id="1_cf3rq"]
 [ext_resource type="Texture2D" uid="uid://cshxbkh02jriu" path="res://assets/sprites/shepherd_Back.png" id="2_2gdqj"]
 [ext_resource type="Texture2D" uid="uid://qxrtfldkbd0g" path="res://assets/sprites/shepherd.png" id="2_gox7x"]
 [ext_resource type="Texture2D" uid="uid://2nv7r3i15vqk" path="res://assets/sprites/shepherd_Walk_Back.png" id="3_yf044"]
 [ext_resource type="Texture2D" uid="uid://ct1a2iy7okudp" path="res://assets/sprites/shepherd_Walk.png" id="4_80psd"]
+[ext_resource type="Texture2D" uid="uid://by4ll3ut4y8nh" path="res://assets/sprites/Gun.png" id="6_4bs2i"]
 [ext_resource type="AudioStream" uid="uid://qwk2mdqcd33m" path="res://assets/SoundAffects/GunShot.mp3" id="6_bwcdi"]
+[ext_resource type="Texture2D" uid="uid://c5afweoj715g5" path="res://assets/sprites/AOE.png" id="7_mt1rk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t626b"]
 atlas = ExtResource("2_2gdqj")
@@ -156,6 +158,35 @@ height = 36.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_n3ljn"]
 radius = 300.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_6a3mt"]
+atlas = ExtResource("6_4bs2i")
+region = Rect2(64, 0, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31xse"]
+atlas = ExtResource("6_4bs2i")
+region = Rect2(192, 0, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ktm0k"]
+atlas = ExtResource("6_4bs2i")
+region = Rect2(0, 0, 64, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sltne"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6a3mt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31xse")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ktm0k")
+}],
+"loop": false,
+"name": &"default",
+"speed": 20.0
+}]
+
 [node name="Cowboy" type="CharacterBody2D" groups=["FearSource", "Player"]]
 collision_layer = 4
 script = ExtResource("1_cf3rq")
@@ -175,6 +206,14 @@ shape = SubResource("CapsuleShape2D_il1rs")
 wait_time = 3.0
 one_shot = true
 
+[node name="AimBar" type="ColorRect" parent="."]
+offset_left = -19.0
+offset_top = 19.0
+offset_right = 21.0
+offset_bottom = 59.0
+scale = Vector2(1, 0.0800006)
+color = Color(1, 0, 0, 1)
+
 [node name="AimTimer" type="Timer" parent="."]
 one_shot = true
 
@@ -185,7 +224,17 @@ collision_mask = 10
 position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_n3ljn")
 
+[node name="AOE" type="Sprite2D" parent="ZapArea"]
+texture_filter = 1
+scale = Vector2(2.35, 2.35)
+texture = ExtResource("7_mt1rk")
+
 [node name="Gunshot" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_bwcdi")
+
+[node name="Gun" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(-1, 1)
+sprite_frames = SubResource("SpriteFrames_sltne")
 
 [connection signal="timeout" from="AimTimer" to="." method="_on_aim_timer_timeout"]
