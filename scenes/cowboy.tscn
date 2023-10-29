@@ -156,7 +156,7 @@ radius = 12.0
 height = 36.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n3ljn"]
-radius = 300.0
+radius = 200.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6a3mt"]
 atlas = ExtResource("6_4bs2i")
@@ -220,14 +220,15 @@ one_shot = true
 [node name="ZapArea" type="Area2D" parent="."]
 collision_mask = 10
 
+[node name="AOE" type="Sprite2D" parent="ZapArea"]
+texture_filter = 1
+position = Vector2(-2.59999, -2.59999)
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("7_mt1rk")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZapArea"]
 position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_n3ljn")
-
-[node name="AOE" type="Sprite2D" parent="ZapArea"]
-texture_filter = 1
-scale = Vector2(2.35, 2.35)
-texture = ExtResource("7_mt1rk")
 
 [node name="Gunshot" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_bwcdi")
