@@ -300,7 +300,7 @@ wait_time = 30.0
 one_shot = true
 
 [node name="SprintCd" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 10.0
 one_shot = true
 
 [node name="Cowboy" parent="." instance=ExtResource("4_jb8n6")]

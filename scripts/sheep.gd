@@ -15,7 +15,7 @@ var _detected: Array[CharacterBody2D] # array holding bodies in detection area
 
 var _sheep_gone_callable: Callable
 
-enum STATE {FLEEING, ROAMING}
+enum STATE {FLEEING, ROAMING, STUN}
 var _current_state = STATE.ROAMING
 
 var _turn_accel: float
@@ -71,6 +71,9 @@ func _process(delta):
 				fear_dir += body.position.direction_to(position)
 			
 			velocity = fear_dir.normalized() * _speed
+		STATE.STUN:
+			_speed = roam_speed
+			velocity = Vector2.ZERO
 	
 # moves the sheep with velocity
 func _physics_process(delta):
@@ -89,13 +92,26 @@ func _physics_process(delta):
 # detect when object enters detection area
 func _on_detection_area_body_entered(body):
 	if body.is_in_group("FearSource"):
-		_current_state = STATE.FLEEING
 		_detected.append(body)
-		sheepbaah.play()
+		if _current_state != STATE.STUN:
+			_current_state = STATE.FLEEING
+			sheepbaah.play()
 
 # detect when object exits detection area
 func _on_detection_area_body_exited(body):
 	if body.is_in_group("FearSource"):
 		_detected.erase(body)
-		if _detected.size() == 0:
+		if _detected.size() == 0 and _current_state != STATE.STUN:
 			_current_state = STATE.ROAMING
+
+func stun():
+	_current_state = STATE.STUN
+	$StunTimer.start()
+
+func _on_stun_timer_timeout():
+	if _detected.size() == 0:
+		_current_state = STATE.ROAMING
+		velocity = Vector2(0, 1).rotated(randf_range(0, 2 * PI)) * roam_speed
+	else:
+		_current_state = STATE.FLEEING
+		
