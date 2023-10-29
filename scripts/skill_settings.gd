@@ -8,6 +8,14 @@ var stun_time_multiplier = 1.0
 var zap_range_multiplier = 1.0
 var sprint_speed_multiplier = 1.0
 
+@onready var _gun_cooldown = gun_cooldown
+@onready var _zap_cooldown = zap_cooldown
+@onready var _sprint_cooldown = sprint_cooldown
+@onready var _gun_aim_time = gun_aim_time
+@onready var _stun_time_multiplier = stun_time_multiplier
+@onready var _zap_range_multiplier = zap_range_multiplier
+@onready var _sprint_speed_multiplier = sprint_speed_multiplier
+
 enum PERKS {GUN_CD, SPRINT_CD, ZAP_CD, AIM_T, STUN_MULT, ZAP_RANGE, SPRINT_SPEED}
 
 # creates a list of 3 perks to pick from
@@ -54,3 +62,12 @@ func get_perk_detail(perk: PERKS):
 			return "Increaze zap range by 10%"
 		PERKS.SPRINT_SPEED:
 			return "Increase sprint speed by 10%"
+			
+func reset_perks():
+	gun_cooldown = _gun_cooldown
+	zap_cooldown = _zap_cooldown
+	sprint_cooldown = _sprint_cooldown
+	gun_aim_time = _gun_aim_time
+	stun_time_multiplier = _stun_time_multiplier
+	zap_range_multiplier = _zap_range_multiplier
+	sprint_speed_multiplier = _sprint_speed_multiplier

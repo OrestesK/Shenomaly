@@ -1,26 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://dm7rfy1j7s7ci"]
+[gd_scene load_steps=7 format=3 uid="uid://dm7rfy1j7s7ci"]
 
 [ext_resource type="Theme" uid="uid://bvode3hd2efqi" path="res://themes/shenomaly_theme.tres" id="1_4tlxx"]
 [ext_resource type="Script" path="res://scripts/menu.gd" id="2_51eoo"]
 [ext_resource type="PackedScene" uid="uid://1knj7p4t1v2h" path="res://scenes/cowboy.tscn" id="2_lhl7b"]
-[ext_resource type="FontFile" uid="uid://cci0hwm4tm18n" path="res://fonts/FiveFontsatFreddy's-Regular.ttf" id="3_j7bfh"]
 [ext_resource type="Texture2D" uid="uid://gfutaxn54pev" path="res://assets/sprites/Title_Screen.png" id="3_jh7bn"]
 [ext_resource type="AudioStream" uid="uid://n2pr7yf4ddf1" path="res://assets/SoundAffects/TitleScreen.mp3" id="4_u12ga"]
-[ext_resource type="Script" path="res://scripts/settings.gd" id="6_joadr"]
 [ext_resource type="Script" path="res://scripts/volume_slider.gd" id="6_ni3r8"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_vlk2h"]
-font_size = 32
-
-[sub_resource type="LabelSettings" id="LabelSettings_detj8"]
-font = ExtResource("3_j7bfh")
-
-[sub_resource type="LabelSettings" id="LabelSettings_xquog"]
-font = ExtResource("3_j7bfh")
-font_size = 20
-
-[node name="menu" type="MarginContainer"]
+[node name="menu" type="Control"]
 texture_filter = 1
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -31,6 +20,8 @@ script = ExtResource("2_51eoo")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 2
+offset_right = 1280.0
+offset_bottom = 720.0
 texture = ExtResource("3_jh7bn")
 expand_mode = 1
 
@@ -38,6 +29,8 @@ expand_mode = 1
 visible = false
 texture_filter = 1
 layout_mode = 2
+offset_right = 1280.0
+offset_bottom = 720.0
 color = Color(0.658824, 0.705882, 0.572549, 1)
 
 [node name="TitleScreen" type="AudioStreamPlayer2D" parent="."]
@@ -48,85 +41,91 @@ position = Vector2(943, 350)
 scale = Vector2(8, 8)
 move = false
 
-[node name="MenuContainer" type="CenterContainer" parent="."]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer"]
-layout_mode = 2
-
-[node name="Title" type="CenterContainer" parent="MenuContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Title" type="Label" parent="MenuContainer/VBoxContainer/Title"]
-layout_mode = 2
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -216.0
+offset_top = 125.0
+offset_right = 216.0
+offset_bottom = 264.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 64
 text = "SHENOMALY"
-label_settings = SubResource("LabelSettings_vlk2h")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="MenuContainer/VBoxContainer"]
-layout_mode = 2
+[node name="Start" type="Button" parent="."]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -27.0
+offset_right = 30.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/VBoxContainer/CenterContainer"]
-layout_mode = 2
+[node name="OpenSettings" type="Button" parent="."]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = 35.0
+offset_right = 44.0
+offset_bottom = 77.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Settings"
 
-[node name="Container1" type="CenterContainer" parent="MenuContainer/VBoxContainer/CenterContainer/VBoxContainer"]
-layout_mode = 2
+[node name="Settings" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer/CenterContainer/VBoxContainer/Container1"]
-layout_mode = 2
-
-[node name="Arrow1" type="Label" parent="MenuContainer/VBoxContainer/CenterContainer/VBoxContainer/Container1/HBoxContainer"]
-custom_minimum_size = Vector2(15, 0)
-layout_mode = 2
-text = ">"
-label_settings = SubResource("LabelSettings_detj8")
-
-[node name="Start" type="Label" parent="MenuContainer/VBoxContainer/CenterContainer/VBoxContainer/Container1/HBoxContainer"]
-custom_minimum_size = Vector2(90, 0)
-layout_mode = 2
-text = "Start
-"
-label_settings = SubResource("LabelSettings_xquog")
-
-[node name="Container2" type="CenterContainer" parent="MenuContainer/VBoxContainer/CenterContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer/CenterContainer/VBoxContainer/Container2"]
-layout_mode = 2
-
-[node name="Arrow2" type="Label" parent="MenuContainer/VBoxContainer/CenterContainer/VBoxContainer/Container2/HBoxContainer"]
-custom_minimum_size = Vector2(15, 0)
-layout_mode = 2
-label_settings = SubResource("LabelSettings_detj8")
-
-[node name="Options" type="Label" parent="MenuContainer/VBoxContainer/CenterContainer/VBoxContainer/Container2/HBoxContainer"]
-custom_minimum_size = Vector2(90, 0)
-layout_mode = 2
-text = "Options"
-label_settings = SubResource("LabelSettings_xquog")
-
-[node name="Container3" type="CenterContainer" parent="MenuContainer/VBoxContainer/CenterContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer/CenterContainer/VBoxContainer/Container3"]
-layout_mode = 2
-
-[node name="Arrow3" type="Label" parent="MenuContainer/VBoxContainer/CenterContainer/VBoxContainer/Container3/HBoxContainer"]
-custom_minimum_size = Vector2(15, 0)
-layout_mode = 2
-label_settings = SubResource("LabelSettings_detj8")
-
-[node name="Exit" type="Label" parent="MenuContainer/VBoxContainer/CenterContainer/VBoxContainer/Container3/HBoxContainer"]
-custom_minimum_size = Vector2(90, 0)
-layout_mode = 2
-text = "Exit"
-label_settings = SubResource("LabelSettings_xquog")
-
-[node name="Settings" type="CenterContainer" parent="."]
-layout_mode = 2
-script = ExtResource("6_joadr")
+[node name="ColorRect" type="ColorRect" parent="Settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.337255, 0.682353, 0.780392)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -85.0
+offset_top = -73.0
+offset_right = 85.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Settings/VBoxContainer"]
 layout_mode = 2
@@ -139,8 +138,17 @@ text = "Volume
 [node name="VolumeSlider" type="HSlider" parent="Settings/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
+min_value = 0.001
+max_value = 1.0
+step = 0.05
+value = 1.0
 script = ExtResource("6_ni3r8")
 
-[node name="Button" type="Button" parent="Settings/VBoxContainer"]
+[node name="Close" type="Button" parent="Settings/VBoxContainer"]
 layout_mode = 2
 text = "Back"
+
+[connection signal="pressed" from="Start" to="." method="start_game"]
+[connection signal="pressed" from="OpenSettings" to="." method="display_settings"]
+[connection signal="value_changed" from="Settings/VBoxContainer/HBoxContainer/VolumeSlider" to="Settings/VBoxContainer/HBoxContainer/VolumeSlider" method="_on_value_changed"]
+[connection signal="pressed" from="Settings/VBoxContainer/Close" to="." method="exit_settings"]

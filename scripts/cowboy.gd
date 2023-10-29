@@ -108,7 +108,8 @@ func _fire_gun():
 func _on_aim_timer_timeout():
 	$Gun.play()
 	move = true
-	_aimed_monster.queue_free()
+	if _aimed_monster != null:
+		_aimed_monster.queue_free()
 
 func _use_zap():
 	$ZapArea.scale = Vector2(SkillSettings.zap_range_multiplier, SkillSettings.zap_range_multiplier)

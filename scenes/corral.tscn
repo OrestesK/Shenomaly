@@ -238,6 +238,7 @@ animations = [{
 
 [node name="Corral" type="Node2D"]
 script = ExtResource("1_aws85")
+sheep_quota = 1
 sp_per_perk = 1
 spawn_bounds = Vector4(-500, -250, 500, 250)
 lightning_range = Vector2(12, 16)
@@ -245,6 +246,7 @@ cage_scene = ExtResource("2_6mnav")
 cage_falling_scene = ExtResource("3_lqrpp")
 sheep_scene = ExtResource("3_a76w7")
 monster_scene = ExtResource("4_fnipf")
+menu_scene = "res://scenes/menu.tscn"
 
 [node name="Gameplay" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_lnuj1")
@@ -335,4 +337,6 @@ animation = &"strike"
 [connection signal="gun_used" from="Cowboy" to="." method="_on_cowboy_gun_used"]
 [connection signal="knockback_used" from="Cowboy" to="." method="_on_cowboy_knockback_used"]
 [connection signal="sprint_used" from="Cowboy" to="." method="_on_cowboy_sprint_used"]
+[connection signal="main_menu" from="HUD" to="." method="_on_hud_main_menu"]
 [connection signal="perk_picked" from="HUD" to="." method="on_pick_perk"]
+[connection signal="retry" from="HUD" to="." method="start_game"]
