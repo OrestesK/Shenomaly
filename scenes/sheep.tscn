@@ -72,6 +72,11 @@ stream = ExtResource("3_js2bv")
 wait_time = 4.0
 one_shot = true
 
+[node name="BaaahTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_detection_area_body_exited"]
 [connection signal="timeout" from="StunTimer" to="." method="_on_stun_timer_timeout"]
+[connection signal="timeout" from="BaaahTimer" to="." method="_on_baaah_timer_timeout"]
