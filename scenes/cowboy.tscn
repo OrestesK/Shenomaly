@@ -174,9 +174,14 @@ shape = SubResource("CapsuleShape2D_il1rs")
 wait_time = 3.0
 one_shot = true
 
+[node name="AimTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="ZapArea" type="Area2D" parent="."]
 collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZapArea"]
 position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_n3ljn")
+
+[connection signal="timeout" from="AimTimer" to="." method="_on_aim_timer_timeout"]

@@ -1,10 +1,15 @@
 extends CanvasLayer
 
+signal perk_picked
+
 const STRIKES_FORMAT = "Strikes: %s"
 const QUOATA_FORMAT = "Sheep remaining: %d"
-const SKILLPOINT_FORMAT = "Skillpoint progress: (%d,%d)"
+const SKILLPOINT_FORMAT = "Skillpoint progress: (%d/%d)"
 const COOLDOWN_FORMAT = "%s available in %ds"
 const COOLDOWN_READY_FORMAT = "%s ready"
+
+func _ready():
+	display_skills(false)
 
 func set_strikes(count: int):
 	$Info/TopLeft/Strikes.text = STRIKES_FORMAT % "X".repeat(count)
@@ -39,3 +44,17 @@ func hide_end_text():
 func show_end_text(text: String):
 	$Info/Center/EndText.text = text
 	$Info/Center/EndText.show()
+	
+func set_perks(perks: Array[SkillSettings.PERKS]):
+	$Info/Skills/Skill1/Text.text = SkillSettings.get_perk_detail(perks[0])
+	$Info/Skills/Skill2/Text.text = SkillSettings.get_perk_detail(perks[1])
+	$Info/Skills/Skill3/Text.text = SkillSettings.get_perk_detail(perks[2])
+	
+func display_skills(show: bool):
+	if show:
+		$Info/Skills.show()
+	else:
+		$Info/Skills.hide()
+
+func _perk_button_pressed(index: int):
+	perk_picked.emit(index)

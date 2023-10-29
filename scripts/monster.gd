@@ -3,6 +3,8 @@ extends CharacterBody2D
 @export var speed: float
 @onready var monsterMoan =  $MonsterCollision/MonsterMoan
 
+@export var stun_time = 2
+
 var _sprite: AnimatedSprite2D
 var _detected: Array[CharacterBody2D] # array holding bodies in detection area
 
@@ -106,7 +108,7 @@ func _on_mouse_exited():
 		SelectMonster.select_monster = null
 		
 func stun():
-	$StunTimer.start()
+	$StunTimer.start(stun_time * SkillSettings.stun_time_multiplier)
 	_stunned = true
 
 func _on_stun_timer_timeout():

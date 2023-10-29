@@ -8,6 +8,8 @@ extends CharacterBody2D
 @export var max_turn_accel: float
 @export var max_avoidance: float
 
+@export var stun_time = 4
+
 @onready var sheepbaah = $SheepBaaah
 
 var _sprite: AnimatedSprite2D
@@ -106,7 +108,7 @@ func _on_detection_area_body_exited(body):
 
 func stun():
 	_current_state = STATE.STUN
-	$StunTimer.start()
+	$StunTimer.start(stun_time * SkillSettings.stun_time_multiplier)
 
 func _on_stun_timer_timeout():
 	if _detected.size() == 0:
