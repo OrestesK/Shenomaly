@@ -38,6 +38,7 @@ func _process(delta):
 	$HUD.set_gun_cooldown($GunCd.time_left)
 	$HUD.set_knockback_cooldown($KnockbackCd.time_left)
 	$HUD.set_sprint_cooldown($SprintCd.time_left)
+	$HUD.set_skillpoint_progress(_skillpoints, sp_per_perk)
 
 func start_game():
 	_strikes = lives
@@ -92,12 +93,13 @@ func on_cage_done(count: int, give_strike: bool):
 		stop_game(true)
 	else:
 		$CageTimer.start()
+		# handle perks appearing
+		if _skillpoints >= sp_per_perk:
+			_display_perks()
 		
-	# handle perks appearing
-	if _skillpoints >= sp_per_perk:
-		_display_perks()
 
 func _display_perks():
+	_skillpoints = 0
 	get_tree().paused = true
 	_perk_selection = SkillSettings.generate_perks()
 	$HUD.set_perks(_perk_selection)
