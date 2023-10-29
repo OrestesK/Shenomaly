@@ -14,8 +14,7 @@ texture_filter = 1
 position = Vector2(-266, 0)
 collision_mask = 2
 script = ExtResource("1_l7320")
-max_sheep = 6
-min_quota = 6
+quota = 5
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

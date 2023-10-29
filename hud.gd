@@ -14,7 +14,7 @@ func _ready():
 	display_skills(false)
 
 func set_strikes(count: int):
-	$Info/TopLeft/Strikes.text = STRIKES_FORMAT % "<3 ".repeat(count)
+	$Info/TopLeft/Strikes.text = STRIKES_FORMAT % "X ".repeat(count)
 
 func set_quota_remaining(count: int):
 	$Info/TopRight/Quota.text = QUOATA_FORMAT % count
