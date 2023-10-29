@@ -27,6 +27,8 @@ var _knockback_ready = true
 
 var _sprint = false
 
+var _aimed_monster: CharacterBody2D
+
 func _ready():
 	sprite = $CowboySprite
 	
@@ -77,8 +79,14 @@ func _start_sprint():
 func _fire_gun():
 	gun_used.emit()
 	_gun_ready = false
-	SelectMonster.select_monster.queue_free()
-	
+	_aimed_monster = SelectMonster.select_monster
+	move = false
+	$AimTimer.start(SkillSettings.gun_aim_time)
+
+func _on_aim_timer_timeout():
+	move = true
+	_aimed_monster.queue_free()
+
 func _use_zap():
 	$ZapArea.scale = Vector2(SkillSettings.zap_range_multiplier, SkillSettings.zap_range_multiplier)
 	knockback_used.emit()
