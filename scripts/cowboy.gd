@@ -73,10 +73,8 @@ func _start_sprint():
 	_sprint_ready = false
 	
 func _fire_gun():
-	print("Gun has been fired")
 	gun_used.emit()
 	_gun_ready = false
-	queue_free()
 	SelectMonster.select_monster.queue_free()
 	
 func _use_zap():
@@ -86,11 +84,8 @@ func _use_zap():
 func _process(_delta):
 	if Input.is_action_pressed("sprint") && _sprint_ready:
 		_start_sprint()
-	if(Input.is_action_just_pressed("shoot")):
-		print("button pressed")
 	if Input.is_action_pressed("shoot") && _gun_ready && SelectMonster.select_monster != null:
 		_fire_gun()
-		print("Gun has been fired")
 	if Input.is_action_pressed("zap") && _knockback_ready:
 		_use_zap()
 		

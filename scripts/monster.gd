@@ -92,17 +92,10 @@ func _physics_process(delta):
 		if collision.get_collider().is_in_group("Sheep"):
 			collision.get_collider().get_captured()
 			monsterMoan.play()
-	
-
-
 
 func _on_mouse_entered():
-	print("Selected")
 	SelectMonster.select_monster = self
 
-
-
 func _on_mouse_exited():
-	print("Deselected")
 	if SelectMonster.select_monster == self:
 		SelectMonster.select_monster = null

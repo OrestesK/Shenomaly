@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/corral.gd" id="1_aws85"]
 [ext_resource type="PackedScene" uid="uid://c1np7vko01cmp" path="res://scenes/cage.tscn" id="2_6mnav"]
 [ext_resource type="PackedScene" uid="uid://bmjip7nsmy66e" path="res://scenes/sheep.tscn" id="3_a76w7"]
-[ext_resource type="PackedScene" uid="uid://cvftcwcc37loy" path="res://scenes/cage_falling.tscn" id="3_lqrpp"]
+[ext_resource type="PackedScene" path="res://scenes/cage_falling.tscn" id="3_lqrpp"]
 [ext_resource type="PackedScene" uid="uid://dndpvioyudhhl" path="res://scenes/monster.tscn" id="4_fnipf"]
 [ext_resource type="PackedScene" uid="uid://1knj7p4t1v2h" path="res://scenes/cowboy.tscn" id="4_jb8n6"]
 [ext_resource type="Texture2D" uid="uid://csoxul62clj8f" path="res://assets/sprites/Background_Main.png" id="5_1gstk"]
