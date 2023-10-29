@@ -33,6 +33,7 @@ var _perk_selection: Array[SkillSettings.PERKS]
 func _ready():
 	start_game()
 	gamePlay.play()
+	$CageTop.position.y = -2000
 
 func _process(delta):
 	$HUD.set_gun_cooldown($GunCd.time_left)
@@ -127,13 +128,22 @@ func spawn_new_cage():
 	"""
 	Randomly spawns a cage using the spawn bounds
 	"""
-	_cage_falling = cage_falling_scene.instantiate()
+	#_cage_falling = cage_falling_scene.instantiate()
 	#for n in 10000:
 	#	cage_falling.position += Vector2(0, -11)
 	#cage_falling.queue_free()
 	
 	_cage = cage_scene.instantiate()
 	_cage.position = Vector2(randf_range(spawn_bounds.x, spawn_bounds.z), randf_range(spawn_bounds.y, spawn_bounds.w))
+	$CageTop.position.x = _cage.position.x
+	get_tree().create_tween().tween_property($CageTop, "position", _cage.position - Vector2(0, 1280/2 * 2 - 64), 1)
+	
+	$CageFalling.start()
+	
+	
+
+func open_cage():
+	get_tree().create_tween().tween_property($CageTop, "position", _cage.position + Vector2(0, -2000), 1)
 	_cage.register_end_callback(on_cage_done)
 	add_child(_cage)
 

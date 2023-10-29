@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cwj00u1myusug"]
+[gd_scene load_steps=46 format=3 uid="uid://cwj00u1myusug"]
 
 [ext_resource type="Script" path="res://scripts/corral.gd" id="1_aws85"]
 [ext_resource type="PackedScene" uid="uid://c1np7vko01cmp" path="res://scenes/cage.tscn" id="2_6mnav"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://dsjlp4jvw8iy2" path="res://assets/SoundAffects/Gameplay.mp3" id="6_lnuj1"]
 [ext_resource type="Texture2D" uid="uid://vi4s246u6qi" path="res://assets/sprites/Background_Fence.png" id="7_o1xjs"]
 [ext_resource type="Texture2D" uid="uid://c32qnbsd5wqjc" path="res://assets/sprites/Lightning.png" id="9_3n8jr"]
+[ext_resource type="Texture2D" uid="uid://y1nxritwkwit" path="res://assets/sprites/Cage_Top.png" id="12_2ho0i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5pe34"]
 size = Vector2(15, 715)
@@ -328,6 +329,15 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_cgkgf")
 animation = &"strike"
 
+[node name="CageTop" type="Sprite2D" parent="."]
+z_index = 9
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("12_2ho0i")
+
+[node name="CageFalling" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="CageTimer" to="." method="spawn_new_cage"]
 [connection signal="timeout" from="SheepTimer" to="." method="spawn_random_sheep"]
 [connection signal="timeout" from="LightningTimer" to="." method="on_lightning_strike"]
@@ -341,3 +351,4 @@ animation = &"strike"
 [connection signal="main_menu" from="HUD" to="." method="_on_hud_main_menu"]
 [connection signal="perk_picked" from="HUD" to="." method="on_pick_perk"]
 [connection signal="retry" from="HUD" to="." method="start_game"]
+[connection signal="timeout" from="CageFalling" to="." method="open_cage"]
