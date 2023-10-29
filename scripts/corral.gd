@@ -14,7 +14,7 @@ extends Node2D
 @export var cage_falling_scene: PackedScene
 @export var sheep_scene: PackedScene
 @export var monster_scene: PackedScene
-
+@onready var gamePlay = $Gameplay
 
 var _cage: Node
 var _cage_falling: Node
@@ -26,6 +26,7 @@ const lightning_height = 800
 
 func _ready():
 	start_game()
+	gamePlay.play()
 
 func _process(delta):
 	$HUD.set_gun_cooldown($GunCd.time_left)

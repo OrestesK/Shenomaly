@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dm7rfy1j7s7ci"]
+[gd_scene load_steps=12 format=3 uid="uid://dm7rfy1j7s7ci"]
 
 [ext_resource type="Theme" uid="uid://bvode3hd2efqi" path="res://themes/shenomaly_theme.tres" id="1_4tlxx"]
 [ext_resource type="Script" path="res://scripts/menu.gd" id="2_51eoo"]
 [ext_resource type="PackedScene" uid="uid://1knj7p4t1v2h" path="res://scenes/cowboy.tscn" id="2_lhl7b"]
 [ext_resource type="FontFile" uid="uid://cci0hwm4tm18n" path="res://fonts/FiveFontsatFreddy's-Regular.ttf" id="3_j7bfh"]
-[ext_resource type="Texture2D" uid="uid://b0o5qeebcoad8" path="res://assets/sprites/Title_Screen.png" id="3_jh7bn"]
+[ext_resource type="Texture2D" uid="uid://btlspjihry56q" path="res://assets/sprites/Title_Screen.png" id="3_jh7bn"]
+[ext_resource type="AudioStream" uid="uid://n2pr7yf4ddf1" path="res://assets/SoundAffects/TitleScreen.mp3" id="4_u12ga"]
 [ext_resource type="Script" path="res://scripts/settings.gd" id="6_joadr"]
 [ext_resource type="Script" path="res://scripts/volume_slider.gd" id="6_ni3r8"]
 
@@ -38,6 +39,9 @@ visible = false
 texture_filter = 1
 layout_mode = 2
 color = Color(0.658824, 0.705882, 0.572549, 1)
+
+[node name="TitleScreen" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_u12ga")
 
 [node name="Cowboy2" parent="." instance=ExtResource("2_lhl7b")]
 position = Vector2(943, 350)

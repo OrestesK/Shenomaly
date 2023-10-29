@@ -1,13 +1,14 @@
-[gd_scene load_steps=44 format=3 uid="uid://cwj00u1myusug"]
+[gd_scene load_steps=45 format=3 uid="uid://cwj00u1myusug"]
 
 [ext_resource type="Script" path="res://scripts/corral.gd" id="1_aws85"]
 [ext_resource type="PackedScene" uid="uid://c1np7vko01cmp" path="res://scenes/cage.tscn" id="2_6mnav"]
 [ext_resource type="PackedScene" uid="uid://bmjip7nsmy66e" path="res://scenes/sheep.tscn" id="3_a76w7"]
-[ext_resource type="PackedScene" uid="uid://cvftcwcc37loy" path="res://scenes/cage_falling.tscn" id="3_lqrpp"]
+[ext_resource type="PackedScene" path="res://scenes/cage_falling.tscn" id="3_lqrpp"]
 [ext_resource type="PackedScene" uid="uid://dndpvioyudhhl" path="res://scenes/monster.tscn" id="4_fnipf"]
 [ext_resource type="PackedScene" uid="uid://1knj7p4t1v2h" path="res://scenes/cowboy.tscn" id="4_jb8n6"]
 [ext_resource type="Texture2D" uid="uid://csoxul62clj8f" path="res://assets/sprites/Background_Main.png" id="5_1gstk"]
 [ext_resource type="PackedScene" uid="uid://yr65f5hdo3a4" path="res://scenes/hud.tscn" id="6_23cdu"]
+[ext_resource type="AudioStream" uid="uid://dsjlp4jvw8iy2" path="res://assets/SoundAffects/Gameplay.mp3" id="6_lnuj1"]
 [ext_resource type="Texture2D" uid="uid://vi4s246u6qi" path="res://assets/sprites/Background_Fence.png" id="7_o1xjs"]
 [ext_resource type="Texture2D" uid="uid://c32qnbsd5wqjc" path="res://assets/sprites/Lightning.png" id="9_3n8jr"]
 
@@ -244,6 +245,9 @@ cage_falling_scene = ExtResource("3_lqrpp")
 sheep_scene = ExtResource("3_a76w7")
 monster_scene = ExtResource("4_fnipf")
 
+[node name="Gameplay" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_lnuj1")
+
 [node name="BackgroundContainer" type="MarginContainer" parent="."]
 z_index = -2
 texture_filter = 1
@@ -296,7 +300,7 @@ wait_time = 30.0
 one_shot = true
 
 [node name="SprintCd" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 10.0
 one_shot = true
 
 [node name="Cowboy" parent="." instance=ExtResource("4_jb8n6")]

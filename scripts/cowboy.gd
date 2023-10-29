@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
-@export var speed = 100
+@export var walk_speed = 100
+@export var sprint_speed = 200
 @export var move = true
 var sprite: AnimatedSprite2D
 
@@ -71,22 +72,27 @@ func set_sprite():
 func _start_sprint():
 	sprint_used.emit()
 	_sprint_ready = false
+	$SprintTimer.start()
 	
 func _fire_gun():
 	gun_used.emit()
 	_gun_ready = false
+	SelectMonster.select_monster.queue_free()
 	
 func _use_zap():
 	knockback_used.emit()
 	_knockback_ready = false
 	
+	for body in $ZapArea.get_overlapping_bodies():
+		print(body.name)
+		if body.has_method("stun"):
+			body.stun()
+	
 func _process(_delta):
 	if Input.is_action_pressed("sprint") && _sprint_ready:
 		_start_sprint()
-		
-	if Input.is_action_pressed("shoot") && _gun_ready:
+	if Input.is_action_pressed("shoot") && _gun_ready && SelectMonster.select_monster != null:
 		_fire_gun()
-		
 	if Input.is_action_pressed("zap") && _knockback_ready:
 		_use_zap()
 		
@@ -94,13 +100,14 @@ func _process(_delta):
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
-	velocity = input_direction * speed
+	velocity = input_direction * (walk_speed if $SprintTimer.is_stopped() else sprint_speed)
 
 func ready_sprint():
 	_sprint_ready = true
 
 func ready_gun():
 	_gun_ready = true;
+	print("Gun is ready to fire")
 
 func ready_knockback():
 	_knockback_ready = true

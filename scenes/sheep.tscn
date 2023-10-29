@@ -4,8 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://ctk35217esrk2" path="res://assets/sprites/sheep.png" id="2_ikmjs"]
 [ext_resource type="AudioStream" uid="uid://bjdggek1pm3kv" path="res://assets/SoundAffects/sheepbaaah.mp3" id="3_js2bv"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cmmma"]
-size = Vector2(30, 19)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xfplm"]
+radius = 7.5
+height = 26.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y5qik"]
 atlas = ExtResource("2_ikmjs")
@@ -35,7 +36,7 @@ radius = 75.0
 [node name="sheep" type="CharacterBody2D" groups=["Sheep"]]
 position = Vector2(26, -57)
 collision_layer = 2
-collision_mask = 3
+collision_mask = 7
 script = ExtResource("1_nwcdf")
 roam_speed = 100.0
 roam_acceleration = 100.0
@@ -47,7 +48,8 @@ max_avoidance = 200.0
 
 [node name="SheepCollision" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0.5)
-shape = SubResource("RectangleShape2D_cmmma")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_xfplm")
 
 [node name="SheepSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -66,5 +68,10 @@ shape = SubResource("CircleShape2D_nrjeg")
 [node name="SheepBaaah" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_js2bv")
 
+[node name="StunTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_detection_area_body_exited"]
+[connection signal="timeout" from="StunTimer" to="." method="_on_stun_timer_timeout"]

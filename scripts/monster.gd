@@ -9,7 +9,7 @@ var _detected: Array[CharacterBody2D] # array holding bodies in detection area
 var sheep: Array[CharacterBody2D]
 var current_dir = 0;
 
-
+var character 
 var error = PI/10
 const EAST = 0
 const SOUTH_EAST = PI / 4
@@ -21,6 +21,8 @@ const NORTH = -PI / 2
 const NORTH_EAST = -PI / 4
 
 var stuck_time = 0.3
+
+var _stunned = false
 
 # on creation
 func _ready():
@@ -66,7 +68,6 @@ func set_sprite():
 	else:
 		pass
 		
-
 # every frame
 func _process(delta):
 	if stuck_time > 0:
@@ -85,6 +86,9 @@ func _process(delta):
 				smallest_dist = dist
 		velocity = position.direction_to(closest.position) * speed
 
+	if _stunned:
+		velocity = Vector2.ZERO
+		
 # moves the monster with velocity
 func _physics_process(delta):
 	var collision = move_and_collide(velocity * delta)
@@ -93,5 +97,17 @@ func _physics_process(delta):
 		if collision.get_collider().is_in_group("Sheep"):
 			collision.get_collider().get_captured()
 			monsterMoan.play()
-	
+			
+func _on_mouse_entered():
+	SelectMonster.select_monster = self
 
+func _on_mouse_exited():
+	if SelectMonster.select_monster == self:
+		SelectMonster.select_monster = null
+		
+func stun():
+	$StunTimer.start()
+	_stunned = true
+
+func _on_stun_timer_timeout():
+	_stunned = false
