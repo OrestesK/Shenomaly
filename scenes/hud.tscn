@@ -17,54 +17,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_6katx")
 
-[node name="Shadow1" type="ColorRect" parent="Info"]
-layout_mode = 2
-offset_left = 10.0
-offset_top = 16.0
-offset_right = 130.0
-offset_bottom = 46.0
-color = Color(0, 0, 0, 0.392157)
-
-[node name="Shadow2" type="ColorRect" parent="Info"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 57.0
-offset_right = 270.0
-offset_bottom = 87.0
-color = Color(0, 0, 0, 0.392157)
-
-[node name="Shadow3" type="ColorRect" parent="Info"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 597.0
-offset_right = 130.0
-offset_bottom = 627.0
-color = Color(0, 0, 0, 0.392157)
-
-[node name="Shadow4" type="ColorRect" parent="Info"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 638.0
-offset_right = 130.0
-offset_bottom = 668.0
-color = Color(0, 0, 0, 0.392157)
-
-[node name="Shadow5" type="ColorRect" parent="Info"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 679.0
-offset_right = 160.0
-offset_bottom = 709.0
-color = Color(0, 0, 0, 0.392157)
-
-[node name="Shadow6" type="ColorRect" parent="Info"]
-layout_mode = 0
-offset_left = 1065.0
-offset_top = 16.0
-offset_right = 1265.0
-offset_bottom = 46.0
-color = Color(0, 0, 0, 0.392157)
-
 [node name="TopLeft" type="VBoxContainer" parent="Info"]
 layout_mode = 1
 offset_left = 20.0
@@ -77,10 +29,28 @@ layout_mode = 2
 text = "Strikes :"
 label_settings = ExtResource("3_17eie")
 
+[node name="Shadow1" type="ColorRect" parent="Info/TopLeft/Strikes"]
+z_index = -1
+layout_mode = 2
+offset_left = -10.0
+offset_top = -4.0
+offset_right = 110.0
+offset_bottom = 26.0
+color = Color(0, 0, 0, 0.392157)
+
 [node name="SkillpointProgress" type="Label" parent="Info/TopLeft"]
 layout_mode = 2
 text = "Skillpoint: (0/3)"
 label_settings = ExtResource("3_17eie")
+
+[node name="Shadow2" type="ColorRect" parent="Info/TopLeft/SkillpointProgress"]
+z_index = -1
+layout_mode = 0
+offset_left = -10.0
+offset_top = -4.0
+offset_right = 250.0
+offset_bottom = 26.0
+color = Color(0, 0, 0, 0.392157)
 
 [node name="TopRight" type="VBoxContainer" parent="Info"]
 layout_mode = 1
@@ -99,6 +69,16 @@ text = "Sheep Remaining: 60"
 label_settings = ExtResource("3_17eie")
 horizontal_alignment = 2
 
+[node name="Shadow6" type="ColorRect" parent="Info/TopRight/Quota"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.392157)
+
 [node name="BottomLeft" type="VBoxContainer" parent="Info"]
 layout_mode = 1
 anchors_preset = 2
@@ -114,15 +94,42 @@ layout_mode = 2
 text = "GUN ready"
 label_settings = ExtResource("3_17eie")
 
+[node name="Shadow3" type="ColorRect" parent="Info/BottomLeft/GunCooldown"]
+z_index = -1
+layout_mode = 0
+offset_left = -10.0
+offset_top = -4.0
+offset_right = 110.0
+offset_bottom = 26.0
+color = Color(0, 0, 0, 0.392157)
+
 [node name="KnockbackCooldown" type="Label" parent="Info/BottomLeft"]
 layout_mode = 2
 text = "ZAP ready"
 label_settings = ExtResource("3_17eie")
 
+[node name="Shadow4" type="ColorRect" parent="Info/BottomLeft/KnockbackCooldown"]
+z_index = -1
+layout_mode = 0
+offset_left = -10.0
+offset_top = -4.0
+offset_right = 110.0
+offset_bottom = 26.0
+color = Color(0, 0, 0, 0.392157)
+
 [node name="SprintCooldown" type="Label" parent="Info/BottomLeft"]
 layout_mode = 2
 text = "SPRINT ready"
 label_settings = ExtResource("3_17eie")
+
+[node name="Shadow5" type="ColorRect" parent="Info/BottomLeft/SprintCooldown"]
+z_index = -1
+layout_mode = 0
+offset_left = -10.0
+offset_top = -4.0
+offset_right = 140.0
+offset_bottom = 26.0
+color = Color(0, 0, 0, 0.392157)
 
 [node name="Center" type="VBoxContainer" parent="Info"]
 layout_mode = 1
