@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://csgy5neb8ksrt"]
+
+[ext_resource type="Script" path="res://scenes/camera_shake.gd" id="1_cegvx"]
+
+[node name="camera_shake" type="Camera2D"]
+script = ExtResource("1_cegvx")

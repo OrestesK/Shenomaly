@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 SelectMonster="*res://scripts/select_monster.gd"
 SkillSettings="*res://scripts/skill_settings.gd"
+CameraMain="*res://scripts/cameraMain.gd"
 
 [display]
 

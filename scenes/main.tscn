@@ -1,13 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://bbxi52lv8f5cp"]
+[gd_scene load_steps=4 format=3 uid="uid://bbxi52lv8f5cp"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_7pqu0"]
 [ext_resource type="PackedScene" uid="uid://cwj00u1myusug" path="res://scenes/corral.tscn" id="2_bba54"]
+[ext_resource type="Script" path="res://scripts/cameraShake.gd" id="2_nu876"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_7pqu0")
 metadata/_edit_horizontal_guides_ = []
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-4, -2)
+[node name="ShakeCamera" type="Camera2D" parent="."]
+script = ExtResource("2_nu876")
+
+[node name="shakeTimer" type="Timer" parent="ShakeCamera"]
+wait_time = 2.0
+one_shot = true
 
 [node name="Corral" parent="." instance=ExtResource("2_bba54")]
+
+[connection signal="timeout" from="ShakeCamera/shakeTimer" to="ShakeCamera" method="_on_Timer_timeout"]

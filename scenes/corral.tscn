@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://cwj00u1myusug"]
+[gd_scene load_steps=47 format=3 uid="uid://cwj00u1myusug"]
 
 [ext_resource type="Script" path="res://scripts/corral.gd" id="1_aws85"]
 [ext_resource type="PackedScene" uid="uid://c1np7vko01cmp" path="res://scenes/cage.tscn" id="2_6mnav"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://vi4s246u6qi" path="res://assets/sprites/Background_Fence.png" id="7_o1xjs"]
 [ext_resource type="Texture2D" uid="uid://c32qnbsd5wqjc" path="res://assets/sprites/Lightning.png" id="9_3n8jr"]
 [ext_resource type="Texture2D" uid="uid://y1nxritwkwit" path="res://assets/sprites/Cage_Top.png" id="12_2ho0i"]
+[ext_resource type="AudioStream" uid="uid://sr14foe6tfib" path="res://assets/SoundAffects/lightning.mp3" id="13_a8mwl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5pe34"]
 size = Vector2(15, 715)
@@ -284,6 +285,10 @@ shape = SubResource("RectangleShape2D_xatra")
 position = Vector2(0, -264)
 shape = SubResource("RectangleShape2D_xatra")
 
+[node name="LightningShakeTimer" type="Timer" parent="."]
+wait_time = 0.75
+one_shot = true
+
 [node name="CageTimer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
@@ -338,6 +343,10 @@ texture = ExtResource("12_2ho0i")
 [node name="CageFalling" type="Timer" parent="."]
 one_shot = true
 
+[node name="Lightning" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_a8mwl")
+
+[connection signal="timeout" from="LightningShakeTimer" to="." method="_on_lightning_shake_timer_timeout"]
 [connection signal="timeout" from="CageTimer" to="." method="spawn_new_cage"]
 [connection signal="timeout" from="SheepTimer" to="." method="spawn_random_sheep"]
 [connection signal="timeout" from="LightningTimer" to="." method="on_lightning_strike"]

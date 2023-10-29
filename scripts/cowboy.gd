@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var sprint_speed = 200
 @export var move = true
 var sprite: AnimatedSprite2D
-
+@onready var gunShot = $Gunshot
 signal sprint_used
 signal gun_used
 signal knockback_used
@@ -107,6 +107,7 @@ func _fire_gun():
 	
 
 func _on_aim_timer_timeout():
+	gunShot.play()
 	$Gun.play()
 	move = true
 	if _aimed_monster != null:

@@ -25,7 +25,6 @@ var _captured_sheep = 0
 var _strikes = 2
 var _sheep: Array[CharacterBody2D]
 var _skillpoints = 0
-
 const lightning_height = 800
 
 var _perk_selection: Array[SkillSettings.PERKS]
@@ -163,7 +162,7 @@ func on_lightning_strike():
 	sheep.queue_free()
 	
 	$LightningEndTimer.start()
-	
+	$LightningShakeTimer.start()
 	
 	$LightningTimer.start(randf_range(lightning_range.x, lightning_range.y))
 
@@ -191,5 +190,9 @@ func _on_gun_cd_timeout():
 func _on_sprint_cd_timeout():
 	$Cowboy.ready_sprint()
 
+func _on_lightning_shake_timer_timeout():
+	$Lightning.play()
+	CameraMain.camera.shake(.5, 2)
+	
 func _on_hud_main_menu():
 	get_tree().change_scene_to_file(menu_scene)
