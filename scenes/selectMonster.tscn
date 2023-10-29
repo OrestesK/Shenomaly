@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://cfm3rgdr10mk"]
+
+[node name="SelectMonster" type="Node2D"]

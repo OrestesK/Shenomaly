@@ -9,7 +9,7 @@ var _detected: Array[CharacterBody2D] # array holding bodies in detection area
 var sheep: Array[CharacterBody2D]
 var current_dir = 0;
 
-
+var character 
 var error = PI/10
 const EAST = 0
 const SOUTH_EAST = PI / 4
@@ -68,7 +68,6 @@ func set_sprite():
 	else:
 		pass
 		
-
 # every frame
 func _process(delta):
 	if stuck_time > 0:
@@ -98,7 +97,14 @@ func _physics_process(delta):
 		if collision.get_collider().is_in_group("Sheep"):
 			collision.get_collider().get_captured()
 			monsterMoan.play()
-	
+			
+func _on_mouse_entered():
+	SelectMonster.select_monster = self
+
+func _on_mouse_exited():
+	if SelectMonster.select_monster == self:
+		SelectMonster.select_monster = null
+		
 func stun():
 	$StunTimer.start()
 	_stunned = true

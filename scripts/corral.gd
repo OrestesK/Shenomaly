@@ -11,10 +11,13 @@ extends Node2D
 
 @export_category("Scenes")
 @export var cage_scene: PackedScene
+@export var cage_falling_scene: PackedScene
 @export var sheep_scene: PackedScene
 @export var monster_scene: PackedScene
+@onready var gamePlay = $Gameplay
 
 var _cage: Node
+var _cage_falling: Node
 var _captured_sheep = 0
 var _strikes = 2
 var _sheep: Array[CharacterBody2D]
@@ -23,6 +26,7 @@ const lightning_height = 800
 
 func _ready():
 	start_game()
+	gamePlay.play()
 
 func _process(delta):
 	$HUD.set_gun_cooldown($GunCd.time_left)
@@ -87,6 +91,11 @@ func spawn_new_cage():
 	"""
 	Randomly spawns a cage using the spawn bounds
 	"""
+	_cage_falling = cage_falling_scene.instantiate()
+	#for n in 10000:
+	#	cage_falling.position += Vector2(0, -11)
+	#cage_falling.queue_free()
+	
 	_cage = cage_scene.instantiate()
 	_cage.position = Vector2(randf_range(spawn_bounds.x, spawn_bounds.z), randf_range(spawn_bounds.y, spawn_bounds.w))
 	_cage.register_end_callback(on_cage_done)
