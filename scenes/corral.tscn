@@ -347,6 +347,7 @@ one_shot = true
 
 [node name="Lightning" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_a8mwl")
+volume_db = -9.37
 
 [node name="FailureBuzz" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("14_8aj1u")
