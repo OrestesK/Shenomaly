@@ -124,7 +124,6 @@ func spawn_new_cage():
 func on_lightning_strike():
 	var sheep_index := randi_range(0, len(_sheep) - 1)
 	var sheep := _sheep[sheep_index]
-	CameraMain.camera.shake(0.2, 1)
 	$LightningStrike.play()
 	$LightningStrike.position = sheep.position - Vector2(0, lightning_height / 2)
 	
@@ -134,7 +133,7 @@ func on_lightning_strike():
 	sheep.queue_free()
 	
 	$LightningEndTimer.start()
-	
+	$LightningShakeTimer.start()
 	
 	$LightningTimer.start(randf_range(lightning_range.x, lightning_range.y))
 
@@ -161,3 +160,7 @@ func _on_gun_cd_timeout():
 
 func _on_sprint_cd_timeout():
 	$Cowboy.ready_sprint()
+
+
+func _on_lightning_shake_timer_timeout():
+	CameraMain.camera.shake(.5, 2)

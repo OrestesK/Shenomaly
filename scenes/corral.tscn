@@ -280,6 +280,10 @@ shape = SubResource("RectangleShape2D_xatra")
 position = Vector2(0, -264)
 shape = SubResource("RectangleShape2D_xatra")
 
+[node name="LightningShakeTimer" type="Timer" parent="."]
+wait_time = 0.75
+one_shot = true
+
 [node name="CageTimer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
@@ -325,6 +329,7 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_cgkgf")
 animation = &"strike"
 
+[connection signal="timeout" from="LightningShakeTimer" to="." method="_on_lightning_shake_timer_timeout"]
 [connection signal="timeout" from="CageTimer" to="." method="spawn_new_cage"]
 [connection signal="timeout" from="SheepTimer" to="." method="spawn_random_sheep"]
 [connection signal="timeout" from="LightningTimer" to="." method="on_lightning_strike"]

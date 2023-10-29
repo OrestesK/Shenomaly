@@ -22,7 +22,8 @@ func shake(time: float, amount: float):
 	set_process(true)
 	timer.start()
 	
-func _on_timer_timeout() -> void:
+func _on_Timer_timeout():
 	set_process(false)
+	print("timerStop")
 	tween.interpolate_value(self, "offset", 1, 1, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	
