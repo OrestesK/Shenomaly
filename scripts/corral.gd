@@ -136,8 +136,11 @@ func spawn_new_cage():
 	add_child(_cage)
 
 func on_lightning_strike():
-	var sheep_index := randi_range(0, len(_sheep) - 1)
+	var sheep_index := 0
 	var sheep := _sheep[sheep_index]
+	while (sheep.position.y - 64/2 < -250):
+		sheep_index = randi_range(0, len(_sheep) - 1)
+		sheep = _sheep[sheep_index]
 	
 	$LightningStrike.play()
 	$LightningStrike.position = sheep.position - Vector2(0, lightning_height / 2)

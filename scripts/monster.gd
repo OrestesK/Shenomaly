@@ -28,6 +28,7 @@ var _stunned = false
 
 # on creation
 func _ready():
+	$Target.hide()
 	_sprite = $MonsterSprite
 	_sprite.play("bopFront")
 
