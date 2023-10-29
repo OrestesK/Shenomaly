@@ -1,6 +1,8 @@
 extends CanvasLayer
 
 signal perk_picked
+signal main_menu
+signal retry
 
 const STRIKES_FORMAT = "Strikes: %s"
 const QUOATA_FORMAT = "Sheep remaining: %d"
@@ -39,11 +41,11 @@ func set_skillpoint_progress(current: int, max: int):
 	$Info/TopLeft/SkillpointProgress.text = SKILLPOINT_FORMAT % [current, max]
 	
 func hide_end_text():
-	$Info/Center/EndText.hide()
+	$Info/EndScreen.hide()
 	
 func show_end_text(text: String):
-	$Info/Center/EndText.text = text
-	$Info/Center/EndText.show()
+	$Info/EndScreen/EndText.text = text
+	$Info/EndScreen.show()
 	
 func set_perks(perks: Array[SkillSettings.PERKS]):
 	$Info/Skills/Skill1/Text.text = SkillSettings.get_perk_detail(perks[0])
@@ -58,3 +60,9 @@ func display_skills(show: bool):
 
 func _perk_button_pressed(index: int):
 	perk_picked.emit(index)
+
+func _on_main_menu_pressed():
+	main_menu.emit()
+
+func _on_retry_pressed():
+	retry.emit()

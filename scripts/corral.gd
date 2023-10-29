@@ -15,6 +15,7 @@ extends Node2D
 @export var cage_falling_scene: PackedScene
 @export var sheep_scene: PackedScene
 @export var monster_scene: PackedScene
+@export_file("*.tscn") var menu_scene: String
 @onready var gamePlay = $Gameplay
 
 var _cage: Node
@@ -42,6 +43,12 @@ func start_game():
 	$CageTimer.start()
 	$LightningTimer.start(randf_range(lightning_range.x, lightning_range.y))
 	
+	SkillSettings.reset_perks()
+	
+	$Cowboy.ready_knockback()
+	$Cowboy.ready_gun()
+	$Cowboy.ready_sprint()
+	
 	$HUD.set_strikes(_strikes)
 	$HUD.set_quota_remaining(sheep_quota)
 	$HUD.set_gun_cooldown(0.0)
@@ -54,10 +61,16 @@ func stop_game(won: bool):
 	get_tree().call_group("Monster", "queue_free")
 	get_tree().call_group("Sheep", "queue_free")
 	
+	_sheep.clear()
+	
 	$HUD.show_end_text("You win!" if won else "You're fired!")
 	$SheepTimer.stop()
 	$CageTimer.stop()
 	$LightningTimer.stop()
+	$LightningEndTimer.stop()
+	$KnockbackCd.stop()
+	$GunCd.stop()
+	$SprintCd.stop()
 
 func on_cage_done(count: int, give_strike: bool):
 	#cage should despawn itself, just call the timer to spawn the next one
@@ -162,3 +175,6 @@ func _on_gun_cd_timeout():
 
 func _on_sprint_cd_timeout():
 	$Cowboy.ready_sprint()
+
+func _on_hud_main_menu():
+	get_tree().change_scene_to_file(menu_scene)

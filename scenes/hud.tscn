@@ -131,7 +131,7 @@ offset_right = 140.0
 offset_bottom = 26.0
 color = Color(0, 0, 0, 0.392157)
 
-[node name="Center" type="VBoxContainer" parent="Info"]
+[node name="EndScreen" type="VBoxContainer" parent="Info"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -145,13 +145,21 @@ offset_bottom = 35.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="EndText" type="Label" parent="Info/Center"]
+[node name="EndText" type="Label" parent="Info/EndScreen"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "You win!"
 label_settings = ExtResource("3_17eie")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="MainMenu" type="Button" parent="Info/EndScreen"]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="Retry" type="Button" parent="Info/EndScreen"]
+layout_mode = 2
+text = "Retry"
 
 [node name="Skills" type="HBoxContainer" parent="Info"]
 layout_mode = 1
@@ -218,6 +226,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[connection signal="pressed" from="Info/EndScreen/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="Info/EndScreen/Retry" to="." method="_on_retry_pressed"]
 [connection signal="pressed" from="Info/Skills/Skill1" to="." method="_perk_button_pressed" binds= [0]]
 [connection signal="pressed" from="Info/Skills/Skill2" to="." method="_perk_button_pressed" binds= [1]]
 [connection signal="pressed" from="Info/Skills/Skill3" to="." method="_perk_button_pressed" binds= [2]]
