@@ -241,10 +241,11 @@ animations = [{
 
 [node name="Corral" type="Node2D"]
 script = ExtResource("1_aws85")
-sheep_quota = 100
-sp_per_perk = 2
+max_sheep = 35
+sheep_quota = 60
+sp_per_perk = 1
 spawn_bounds = Vector4(-500, -250, 500, 250)
-lightning_range = Vector2(12, 16)
+lightning_range = Vector2(15, 20)
 cage_scene = ExtResource("2_6mnav")
 cage_falling_scene = ExtResource("3_lqrpp")
 sheep_scene = ExtResource("3_a76w7")
