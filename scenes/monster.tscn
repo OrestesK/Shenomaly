@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dndpvioyudhhl"]
+[gd_scene load_steps=30 format=3 uid="uid://dndpvioyudhhl"]
 
 [ext_resource type="Texture2D" uid="uid://ddwm6d07qwxi" path="res://assets/sprites/Monster.png" id="1_im8ri"]
 [ext_resource type="Script" path="res://scripts/monster.gd" id="1_q7soi"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dfqf1tk2qtc6o" path="res://assets/sprites/Monster Back.png" id="3_hdl8h"]
 [ext_resource type="Texture2D" uid="uid://b2o2a125ri6pi" path="res://assets/sprites/Monster_Walk.png" id="4_cy3uf"]
 [ext_resource type="Texture2D" uid="uid://dwkpshn1wyfah" path="res://assets/sprites/Monster_Walk_Back.png" id="4_lybn0"]
+[ext_resource type="Texture2D" uid="uid://cxjk1bb1da2tm" path="res://assets/sprites/Cross_Hair.png" id="7_te6eu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nm1ux"]
 size = Vector2(48, 73)
@@ -196,6 +197,12 @@ animation = &"bopBack"
 
 [node name="StunTimer" type="Timer" parent="."]
 wait_time = 2.0
+
+[node name="Target" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -20)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("7_te6eu")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
