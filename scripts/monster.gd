@@ -22,6 +22,8 @@ const NORTH_EAST = -PI / 4
 
 var stuck_time = 0.3
 
+var _stunned = false
+
 # on creation
 func _ready():
 	_sprite = $MonsterSprite
@@ -85,6 +87,9 @@ func _process(delta):
 				smallest_dist = dist
 		velocity = position.direction_to(closest.position) * speed
 
+	if _stunned:
+		velocity = Vector2.ZERO
+		
 # moves the monster with velocity
 func _physics_process(delta):
 	var collision = move_and_collide(velocity * delta)
@@ -94,4 +99,9 @@ func _physics_process(delta):
 			collision.get_collider().get_captured()
 			monsterMoan.play()
 	
+func stun():
+	$StunTimer.start()
+	_stunned = true
 
+func _on_stun_timer_timeout():
+	_stunned = false

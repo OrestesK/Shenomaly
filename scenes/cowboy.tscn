@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://1knj7p4t1v2h"]
+[gd_scene load_steps=26 format=3 uid="uid://1knj7p4t1v2h"]
 
 [ext_resource type="Script" path="res://scripts/cowboy.gd" id="1_cf3rq"]
 [ext_resource type="Texture2D" uid="uid://cshxbkh02jriu" path="res://assets/sprites/shepherd_Back.png" id="2_2gdqj"]
@@ -152,6 +152,9 @@ animations = [{
 radius = 12.0
 height = 36.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_n3ljn"]
+radius = 300.0
+
 [node name="Cowboy" type="CharacterBody2D" groups=["FearSource", "Player"]]
 collision_layer = 4
 script = ExtResource("1_cf3rq")
@@ -170,3 +173,10 @@ shape = SubResource("CapsuleShape2D_il1rs")
 [node name="SprintTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="ZapArea" type="Area2D" parent="."]
+collision_mask = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZapArea"]
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_n3ljn")

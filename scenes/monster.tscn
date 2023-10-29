@@ -192,3 +192,8 @@ pitch_scale = 1.15
 [node name="MonsterSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p5m2m")
 animation = &"bopBack"
+
+[node name="StunTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="StunTimer" to="." method="_on_stun_timer_timeout"]

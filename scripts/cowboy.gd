@@ -82,6 +82,11 @@ func _use_zap():
 	knockback_used.emit()
 	_knockback_ready = false
 	
+	for body in $ZapArea.get_overlapping_bodies():
+		print(body.name)
+		if body.has_method("stun"):
+			body.stun()
+	
 func _process(_delta):
 	if Input.is_action_pressed("sprint") && _sprint_ready:
 		_start_sprint()
