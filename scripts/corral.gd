@@ -84,6 +84,7 @@ func on_cage_done(count: int, give_strike: bool):
 	if give_strike:
 		_strikes -=1
 		$HUD.set_strikes(_strikes)
+		$FailureBuzz.play()
 	else:
 		_skillpoints += 1
 	
